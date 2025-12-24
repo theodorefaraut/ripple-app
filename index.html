@@ -16,6 +16,29 @@
             align-items: center;
             padding: 60px 20px;
         }
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+        }
+        .lang-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.6);
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover { background: rgba(255,255,255,0.2); }
+        .lang-btn.active {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border-color: rgba(255,255,255,0.4);
+        }
         .logo {
             width: 120px;
             height: 120px;
@@ -73,9 +96,14 @@
     </style>
 </head>
 <body>
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+
     <img src="icon.png" alt="Ripple" class="logo">
     <h1>Ripple</h1>
-    <p class="tagline">Trie tes playlists<br>en un swipe</p>
+    <p class="tagline" data-fr="Trie tes playlists<br>en un swipe" data-en="Sort your playlists<br>with a swipe">Trie tes playlists<br>en un swipe</p>
     
     <div class="badge">
         <a href="https://apps.apple.com/app/ripple" target="_blank">
@@ -84,20 +112,36 @@
     </div>
     
     <div class="features">
-        <h2>Fonctionnalités</h2>
+        <h2 data-fr="Fonctionnalités" data-en="Features">Fonctionnalités</h2>
         <ul>
-            <li>✨ Swipe à droite pour ajouter aux favoris ou à une playlist</li>
-            <li>⏭️ Swipe à gauche pour passer au suivant</li>
-            <li>🎧 Écoute un aperçu avant de décider</li>
-            <li>📊 Trie par titre, artiste, album ou ordre playlist</li>
-            <li>🌙 Mode sombre et clair</li>
+            <li data-fr="✨ Swipe à droite pour ajouter aux favoris ou à une playlist" data-en="✨ Swipe right to add to favorites or a playlist">✨ Swipe à droite pour ajouter aux favoris ou à une playlist</li>
+            <li data-fr="⏭️ Swipe à gauche pour passer au suivant" data-en="⏭️ Swipe left to skip">⏭️ Swipe à gauche pour passer au suivant</li>
+            <li data-fr="🎧 Écoute un aperçu avant de décider" data-en="🎧 Listen to a preview before deciding">🎧 Écoute un aperçu avant de décider</li>
+            <li data-fr="📊 Trie par titre, artiste, album ou ordre playlist" data-en="📊 Sort by title, artist, album or playlist order">📊 Trie par titre, artiste, album ou ordre playlist</li>
+            <li data-fr="🌙 Mode sombre et clair" data-en="🌙 Dark and light mode">🌙 Mode sombre et clair</li>
         </ul>
     </div>
     
     <div class="links">
-        <a href="privacy.html">Politique de confidentialité</a>
-        <a href="support.html">Support</a>
+        <a href="privacy.html" data-fr="Politique de confidentialité" data-en="Privacy Policy">Politique de confidentialité</a>
+        <a href="support.html" data-fr="Support" data-en="Support">Support</a>
     </div>
+
+    <script>
+        function setLang(lang) {
+            document.querySelectorAll('[data-fr]').forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+            });
+            localStorage.setItem('lang', lang);
+        }
+        
+        // Load saved language or detect from browser
+        const savedLang = localStorage.getItem('lang');
+        const browserLang = navigator.language.startsWith('fr') ? 'fr' : 'en';
+        setLang(savedLang || browserLang);
+    </script>
 </body>
 </html>
-

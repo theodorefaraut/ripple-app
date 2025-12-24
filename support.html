@@ -13,6 +13,29 @@
             line-height: 1.7;
             padding: 40px 20px;
         }
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+        }
+        .lang-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.6);
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover { background: rgba(255,255,255,0.2); }
+        .lang-btn.active {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border-color: rgba(255,255,255,0.4);
+        }
         .container {
             max-width: 700px;
             margin: 0 auto;
@@ -68,44 +91,64 @@
     </style>
 </head>
 <body>
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+
     <div class="container">
-        <h1>Support</h1>
-        <p>Besoin d'aide avec Ripple ? Nous sommes là pour vous.</p>
+        <h1 data-fr="Support" data-en="Support">Support</h1>
+        <p data-fr="Besoin d'aide avec Ripple ? Nous sommes là pour vous." data-en="Need help with Ripple? We're here for you.">Besoin d'aide avec Ripple ? Nous sommes là pour vous.</p>
         
-        <h2>Contact</h2>
+        <h2 data-fr="Contact" data-en="Contact">Contact</h2>
         <div class="contact-box">
             <p>📧 Email : <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
         </div>
         
-        <h2>Questions fréquentes</h2>
+        <h2 data-fr="Questions fréquentes" data-en="Frequently asked questions">Questions fréquentes</h2>
         
         <div class="faq-item">
-            <h3>Pourquoi dois-je autoriser l'accès à Apple Music ?</h3>
-            <p>Ripple a besoin d'accéder à votre bibliothèque pour afficher vos playlists et vous permettre d'ajouter des morceaux à vos favoris.</p>
+            <h3 data-fr="Pourquoi dois-je autoriser l'accès à Apple Music ?" data-en="Why do I need to authorize access to Apple Music?">Pourquoi dois-je autoriser l'accès à Apple Music ?</h3>
+            <p data-fr="Ripple a besoin d'accéder à votre bibliothèque pour afficher vos playlists et vous permettre d'ajouter des morceaux à vos favoris." data-en="Ripple needs to access your library to display your playlists and allow you to add tracks to your favorites.">Ripple a besoin d'accéder à votre bibliothèque pour afficher vos playlists et vous permettre d'ajouter des morceaux à vos favoris.</p>
         </div>
         
         <div class="faq-item">
-            <h3>Mes playlists créées n'apparaissent pas</h3>
-            <p>Les playlists créées récemment peuvent mettre quelques minutes avant d'apparaître (limitation Apple Music). Tirez vers le bas pour actualiser.</p>
+            <h3 data-fr="Mes playlists créées n'apparaissent pas" data-en="My created playlists don't appear">Mes playlists créées n'apparaissent pas</h3>
+            <p data-fr="Les playlists créées récemment peuvent mettre quelques minutes avant d'apparaître (limitation Apple Music). Tirez vers le bas pour actualiser." data-en="Recently created playlists may take a few minutes to appear (Apple Music limitation). Pull down to refresh.">Les playlists créées récemment peuvent mettre quelques minutes avant d'apparaître (limitation Apple Music). Tirez vers le bas pour actualiser.</p>
         </div>
         
         <div class="faq-item">
-            <h3>L'application nécessite-t-elle un abonnement Apple Music ?</h3>
-            <p>Oui, un abonnement Apple Music actif est requis pour utiliser Ripple.</p>
+            <h3 data-fr="L'application nécessite-t-elle un abonnement Apple Music ?" data-en="Does the app require an Apple Music subscription?">L'application nécessite-t-elle un abonnement Apple Music ?</h3>
+            <p data-fr="Oui, un abonnement Apple Music actif est requis pour utiliser Ripple." data-en="Yes, an active Apple Music subscription is required to use Ripple.">Oui, un abonnement Apple Music actif est requis pour utiliser Ripple.</p>
         </div>
         
         <div class="faq-item">
-            <h3>Comment supprimer mes données ?</h3>
-            <p>Toutes les données sont stockées localement. Supprimez simplement l'application pour effacer toutes les données.</p>
+            <h3 data-fr="Comment supprimer mes données ?" data-en="How do I delete my data?">Comment supprimer mes données ?</h3>
+            <p data-fr="Toutes les données sont stockées localement. Supprimez simplement l'application pour effacer toutes les données." data-en="All data is stored locally. Simply delete the app to erase all data.">Toutes les données sont stockées localement. Supprimez simplement l'application pour effacer toutes les données.</p>
         </div>
         
         <div class="faq-item">
-            <h3>L'application est-elle gratuite ?</h3>
-            <p>Oui, Ripple est entièrement gratuite et sans publicité.</p>
+            <h3 data-fr="L'application est-elle gratuite ?" data-en="Is the app free?">L'application est-elle gratuite ?</h3>
+            <p data-fr="Oui, Ripple est entièrement gratuite et sans publicité." data-en="Yes, Ripple is completely free and ad-free.">Oui, Ripple est entièrement gratuite et sans publicité.</p>
         </div>
         
-        <a href="index.html" class="back">← Retour à l'accueil</a>
+        <a href="index.html" class="back" data-fr="← Retour à l'accueil" data-en="← Back to home">← Retour à l'accueil</a>
     </div>
+
+    <script>
+        function setLang(lang) {
+            document.querySelectorAll('[data-fr]').forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+            });
+            localStorage.setItem('lang', lang);
+        }
+        
+        const savedLang = localStorage.getItem('lang');
+        const browserLang = navigator.language.startsWith('fr') ? 'fr' : 'en';
+        setLang(savedLang || browserLang);
+    </script>
 </body>
 </html>
-
