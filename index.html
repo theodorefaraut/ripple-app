@@ -159,26 +159,24 @@
         .footer-info {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            gap: 8px 16px;
             padding: 16px 20px;
             background: rgba(255,255,255,0.03);
             border-radius: 12px;
             margin-bottom: 48px;
+            text-align: center;
         }
         
         .footer-info span {
             font-size: 13px;
             color: rgba(255,255,255,0.6);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            white-space: nowrap;
         }
         
         .footer-info .dot {
-            width: 4px;
-            height: 4px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
+            color: rgba(255,255,255,0.3);
         }
         
         .links {
@@ -266,11 +264,11 @@
         
         <div class="footer-info">
             <span data-fr="✓ Gratuit" data-en="✓ Free">✓ Free</span>
-            <span class="dot"></span>
+            <span class="dot">·</span>
             <span data-fr="✓ Sans publicité" data-en="✓ Ad-free">✓ Ad-free</span>
-            <span class="dot"></span>
+            <span class="dot">·</span>
             <span data-fr="✓ Mode sombre" data-en="✓ Dark mode">✓ Dark mode</span>
-            <span class="dot"></span>
+            <span class="dot">·</span>
             <span data-fr="Requiert Apple Music" data-en="Requires Apple Music">Requires Apple Music</span>
         </div>
         
