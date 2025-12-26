@@ -9,26 +9,38 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
             background: #000;
             color: #fff;
             line-height: 1.7;
             padding: 40px 20px;
         }
-        .container { max-width: 700px; margin: 0 auto; }
-        h1 { font-size: 32px; margin-bottom: 8px; }
-        .date { color: rgba(255,255,255,0.5); margin-bottom: 40px; }
-        h2 { font-size: 20px; margin-top: 32px; margin-bottom: 12px; color: #FF002F; }
-        p { margin-bottom: 16px; color: rgba(255,255,255,0.85); }
+        .container { max-width: 640px; margin: 0 auto; }
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #FF002F;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+        .back:hover { text-decoration: underline; }
+        h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .date { color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 40px; }
+        h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: #FF002F; margin-top: 32px; margin-bottom: 12px; }
+        p { margin-bottom: 16px; color: rgba(255,255,255,0.85); font-size: 15px; }
         ul { margin-left: 20px; margin-bottom: 16px; }
-        li { margin-bottom: 8px; color: rgba(255,255,255,0.85); }
+        li { margin-bottom: 8px; color: rgba(255,255,255,0.85); font-size: 15px; }
         a { color: #FF002F; text-decoration: none; }
         a:hover { text-decoration: underline; }
-        .back { display: inline-block; margin-top: 40px; color: rgba(255,255,255,0.6); }
+        strong { color: #fff; }
     </style>
 </head>
 <body>
     <div class="container">
+        <a href="index.html" class="back">← Back</a>
+        
         <h1>Privacy Policy</h1>
         <p class="date">Last updated: December 2025</p>
         
@@ -40,22 +52,23 @@
         <p>The app only accesses:</p>
         <ul>
             <li>Your Apple Music library (playlists, tracks)</li>
-            <li>Your sorting preferences (stored locally on your device)</li>
+            <li>Your preferences (sorting, theme, language) stored locally</li>
         </ul>
         
         <h2>Data usage</h2>
         <p>Your Apple Music library data is used only to:</p>
         <ul>
-            <li>Display your playlists in the app</li>
-            <li>Allow you to sort your tracks</li>
-            <li>Add tracks to your Apple Music favorites or playlists</li>
+            <li>Display your playlists and recommendations</li>
+            <li>Allow you to sort and browse your tracks</li>
+            <li>Add tracks to your favorites or playlists</li>
+            <li>Create new playlists in your library</li>
         </ul>
         
         <h2>Data storage</h2>
         <p>All data is stored locally on your device. No data is sent to external servers, except for calls to the Apple Music API to access your library.</p>
         
         <h2>Data sharing</h2>
-        <p>Ripple does not share any data with third parties.</p>
+        <p>Ripple does not share any data with third parties. We do not use any analytics or tracking tools.</p>
         
         <h2>Third-party services</h2>
         <p>The app uses the Apple MusicKit API to access your library. Use of this service is subject to <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple's privacy policy</a>.</p>
@@ -63,18 +76,15 @@
         <h2>Your rights</h2>
         <p>You can at any time:</p>
         <ul>
-            <li>Revoke Ripple's access to your Apple Music library from your device settings</li>
+            <li>Revoke Ripple's access to your Apple Music library from Settings > Privacy > Media & Apple Music</li>
             <li>Delete the app and all associated local data</li>
         </ul>
         
         <h2>Contact</h2>
-        <p>For any questions regarding this policy, contact us: <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
+        <p>For any questions regarding this policy: <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
         
         <h2>Changes</h2>
         <p>This policy may be updated. Changes will be posted on this page with a new update date.</p>
-        
-        <a href="index.html" class="back">← Back to home</a>
     </div>
 </body>
 </html>
-

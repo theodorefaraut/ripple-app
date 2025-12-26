@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,18 +9,19 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
             background: #000;
             color: #fff;
             line-height: 1.7;
             padding: 40px 20px;
         }
         .lang-switch {
-            position: absolute;
+            position: fixed;
             top: 20px;
             right: 20px;
             display: flex;
             gap: 8px;
+            z-index: 100;
         }
         .lang-btn {
             background: rgba(255,255,255,0.1);
@@ -39,122 +40,147 @@
             border-color: rgba(255,255,255,0.4);
         }
         .container {
-            max-width: 700px;
+            max-width: 640px;
             margin: 0 auto;
         }
-        h1 {
-            font-size: 32px;
-            margin-bottom: 24px;
-        }
-        h2 {
-            font-size: 20px;
-            margin-top: 32px;
-            margin-bottom: 12px;
-            color: #FF002F;
-        }
-        p {
-            margin-bottom: 16px;
-            color: rgba(255,255,255,0.85);
-        }
-        a {
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             color: #FF002F;
             text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 32px;
         }
-        a:hover { text-decoration: underline; }
+        .back:hover { text-decoration: underline; }
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .intro {
+            color: rgba(255,255,255,0.7);
+            font-size: 15px;
+            margin-bottom: 32px;
+        }
+        h2 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #FF002F;
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
         .contact-box {
-            background: #1C1C1E;
-            border-radius: 16px;
-            padding: 24px;
-            margin: 24px 0;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 8px;
         }
         .contact-box p {
             margin: 0;
+            font-size: 15px;
         }
+        .contact-box a {
+            color: #FF002F;
+            text-decoration: none;
+        }
+        .contact-box a:hover { text-decoration: underline; }
         .faq-item {
-            background: #1C1C1E;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 12px;
+            padding: 18px 20px;
+            margin-bottom: 10px;
         }
         .faq-item h3 {
-            font-size: 16px;
+            font-size: 15px;
+            font-weight: 600;
             margin-bottom: 8px;
+            color: #fff;
         }
         .faq-item p {
             font-size: 14px;
             margin: 0;
             color: rgba(255,255,255,0.7);
-        }
-        .back {
-            display: inline-block;
-            margin-top: 40px;
-            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
     <div class="lang-switch">
-        <button class="lang-btn active" onclick="setLang('fr')">FR</button>
-        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
     </div>
 
     <div class="container">
-        <h1 data-fr="Support" data-en="Support">Support</h1>
-        <p data-fr="Besoin d'aide avec Ripple ? Nous sommes là pour vous." data-en="Need help with Ripple? We're here for you.">Besoin d'aide avec Ripple ? Nous sommes là pour vous.</p>
+        <a href="index.html" class="back" data-fr="← Retour" data-en="← Back">← Back</a>
         
-        <h2 data-fr="Contact" data-en="Contact">Contact</h2>
+        <h1>Support</h1>
+        <p class="intro" data-fr="Besoin d'aide avec Ripple ? Nous sommes là pour vous." data-en="Need help with Ripple? We're here for you.">Need help with Ripple? We're here for you.</p>
+        
+        <h2>Contact</h2>
         <div class="contact-box">
-            <p>📧 Email : <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
+            <p>📧 <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
         </div>
         
-        <h2 data-fr="Questions fréquentes" data-en="Frequently asked questions">Questions fréquentes</h2>
+        <h2 data-fr="Questions fréquentes" data-en="FAQ">FAQ</h2>
         
         <div class="faq-item">
-            <h3 data-fr="Pourquoi dois-je autoriser l'accès à Apple Music ?" data-en="Why do I need to authorize access to Apple Music?">Pourquoi dois-je autoriser l'accès à Apple Music ?</h3>
-            <p data-fr="Ripple a besoin d'accéder à votre bibliothèque pour afficher vos playlists et vous permettre d'ajouter des morceaux à vos favoris ou playlists." data-en="Ripple needs to access your library to display your playlists and allow you to add tracks to your favorites or playlists.">Ripple a besoin d'accéder à votre bibliothèque pour afficher vos playlists et vous permettre d'ajouter des morceaux à vos favoris ou playlists.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3 data-fr="Comment changer le mode de swipe ?" data-en="How do I change the swipe mode?">Comment changer le mode de swipe ?</h3>
-            <p data-fr="Appuyez sur l'icône main en haut de l'écran. Vous pouvez choisir entre le mode Favoris ou Ajout à une playlist." data-en="Tap the hand icon at the top of the screen. You can choose between Favorites mode or Add to playlist mode.">Appuyez sur l'icône main en haut de l'écran. Vous pouvez choisir entre le mode Favoris ou Ajout à une playlist.</p>
+            <h3 data-fr="Pourquoi dois-je autoriser l'accès à Apple Music ?" data-en="Why do I need to authorize access to Apple Music?">Why do I need to authorize access to Apple Music?</h3>
+            <p data-fr="Ripple a besoin d'accéder à votre bibliothèque pour afficher vos playlists, les recommandations et vous permettre d'ajouter des morceaux à vos favoris ou playlists." data-en="Ripple needs to access your library to display your playlists, recommendations, and allow you to add tracks to your favorites or playlists.">Ripple needs to access your library to display your playlists, recommendations, and allow you to add tracks to your favorites or playlists.</p>
         </div>
         
         <div class="faq-item">
-            <h3 data-fr="Comment ajouter un morceau à une playlist spécifique ?" data-en="How do I add a track to a specific playlist?">Comment ajouter un morceau à une playlist spécifique ?</h3>
-            <p data-fr="Depuis la liste des morceaux, appuyez sur l'icône + à côté du cœur. Vous pourrez choisir une playlist existante ou en créer une nouvelle." data-en="From the track list, tap the + icon next to the heart. You can choose an existing playlist or create a new one.">Depuis la liste des morceaux, appuyez sur l'icône + à côté du cœur. Vous pourrez choisir une playlist existante ou en créer une nouvelle.</p>
+            <h3 data-fr="Quelle est la différence entre les deux modes ?" data-en="What's the difference between the two modes?">What's the difference between the two modes?</h3>
+            <p data-fr="<strong>Mode Favoris :</strong> swipe à droite ajoute le morceau à vos favoris Apple Music.<br><strong>Mode Ajout à une playlist :</strong> swipe à droite ajoute le morceau à une playlist de votre choix." data-en="<strong>Favorites mode:</strong> swipe right adds the track to your Apple Music favorites.<br><strong>Add to Playlist mode:</strong> swipe right adds the track to a playlist of your choice."><strong>Favorites mode:</strong> swipe right adds the track to your Apple Music favorites.<br><strong>Add to Playlist mode:</strong> swipe right adds the track to a playlist of your choice.</p>
         </div>
         
         <div class="faq-item">
-            <h3 data-fr="Mes playlists créées n'apparaissent pas" data-en="My created playlists don't appear">Mes playlists créées n'apparaissent pas</h3>
-            <p data-fr="Les playlists créées récemment peuvent mettre quelques minutes avant d'apparaître (limitation Apple Music). Tirez vers le bas pour actualiser." data-en="Recently created playlists may take a few minutes to appear (Apple Music limitation). Pull down to refresh.">Les playlists créées récemment peuvent mettre quelques minutes avant d'apparaître (limitation Apple Music). Tirez vers le bas pour actualiser.</p>
+            <h3 data-fr="Comment changer le mode de swipe ?" data-en="How do I change the swipe mode?">How do I change the swipe mode?</h3>
+            <p data-fr="Appuyez sur l'icône main (🖐️) en haut de l'écran. Vous pouvez choisir entre le mode Favoris ou Ajout à une playlist, et sélectionner la playlist cible." data-en="Tap the hand icon (🖐️) at the top of the screen. You can choose between Favorites mode or Add to Playlist mode, and select the target playlist.">Tap the hand icon (🖐️) at the top of the screen. You can choose between Favorites mode or Add to Playlist mode, and select the target playlist.</p>
         </div>
         
         <div class="faq-item">
-            <h3 data-fr="C'est quoi la section « Pour vous » ?" data-en="What is the 'For You' section?">C'est quoi la section « Pour vous » ?</h3>
-            <p data-fr="Cette section affiche des playlists recommandées par Apple Music en fonction de vos goûts musicaux. Parfait pour découvrir de nouveaux morceaux !" data-en="This section displays playlists recommended by Apple Music based on your music tastes. Perfect for discovering new tracks!">Cette section affiche des playlists recommandées par Apple Music en fonction de vos goûts musicaux. Parfait pour découvrir de nouveaux morceaux !</p>
+            <h3 data-fr="Comment ajouter un morceau à une playlist spécifique ?" data-en="How do I add a track to a specific playlist?">How do I add a track to a specific playlist?</h3>
+            <p data-fr="Depuis la liste des morceaux, appuyez sur l'icône + à côté du cœur. Vous pourrez choisir une playlist existante ou en créer une nouvelle." data-en="From the track list, tap the + icon next to the heart. You can choose an existing playlist or create a new one.">From the track list, tap the + icon next to the heart. You can choose an existing playlist or create a new one.</p>
         </div>
         
         <div class="faq-item">
-            <h3 data-fr="Pourquoi certains morceaux sont grisés ?" data-en="Why are some tracks grayed out?">Pourquoi certains morceaux sont grisés ?</h3>
-            <p data-fr="Les morceaux grisés sont ceux que vous avez déjà traités (swipés). Ils restent visibles pour référence et vous pouvez toujours interagir avec." data-en="Grayed out tracks are those you've already processed (swiped). They remain visible for reference and you can still interact with them.">Les morceaux grisés sont ceux que vous avez déjà traités (swipés). Ils restent visibles pour référence et vous pouvez toujours interagir avec.</p>
+            <h3 data-fr="C'est quoi la section « Pour vous » ?" data-en="What is the 'For You' section?">What is the "For You" section?</h3>
+            <p data-fr="Cette section affiche des playlists recommandées par Apple Music en fonction de vos goûts musicaux. Parfait pour découvrir de nouveaux morceaux !" data-en="This section displays playlists recommended by Apple Music based on your music tastes. Perfect for discovering new tracks!">This section displays playlists recommended by Apple Music based on your music tastes. Perfect for discovering new tracks!</p>
         </div>
         
         <div class="faq-item">
-            <h3 data-fr="L'application nécessite-t-elle un abonnement Apple Music ?" data-en="Does the app require an Apple Music subscription?">L'application nécessite-t-elle un abonnement Apple Music ?</h3>
-            <p data-fr="Oui, un abonnement Apple Music actif est requis pour utiliser Ripple." data-en="Yes, an active Apple Music subscription is required to use Ripple.">Oui, un abonnement Apple Music actif est requis pour utiliser Ripple.</p>
+            <h3 data-fr="Pourquoi certains morceaux sont grisés ?" data-en="Why are some tracks grayed out?">Why are some tracks grayed out?</h3>
+            <p data-fr="Les morceaux grisés sont ceux que vous avez déjà traités (swipés). Ils restent visibles pour référence et vous pouvez toujours interagir avec." data-en="Grayed out tracks are those you've already processed (swiped). They remain visible for reference and you can still interact with them.">Grayed out tracks are those you've already processed (swiped). They remain visible for reference and you can still interact with them.</p>
         </div>
         
         <div class="faq-item">
-            <h3 data-fr="Comment supprimer mes données ?" data-en="How do I delete my data?">Comment supprimer mes données ?</h3>
-            <p data-fr="Toutes les données sont stockées localement. Supprimez simplement l'application pour effacer toutes les données." data-en="All data is stored locally. Simply delete the app to erase all data.">Toutes les données sont stockées localement. Supprimez simplement l'application pour effacer toutes les données.</p>
+            <h3 data-fr="Mes playlists créées n'apparaissent pas" data-en="My created playlists don't appear">My created playlists don't appear</h3>
+            <p data-fr="Les playlists créées récemment peuvent mettre quelques minutes avant d'apparaître (limitation Apple Music). Tirez vers le bas pour actualiser." data-en="Recently created playlists may take a few minutes to appear (Apple Music limitation). Pull down to refresh.">Recently created playlists may take a few minutes to appear (Apple Music limitation). Pull down to refresh.</p>
         </div>
         
         <div class="faq-item">
-            <h3 data-fr="L'application est-elle gratuite ?" data-en="Is the app free?">L'application est-elle gratuite ?</h3>
-            <p data-fr="Oui, Ripple est entièrement gratuite et sans publicité." data-en="Yes, Ripple is completely free and ad-free.">Oui, Ripple est entièrement gratuite et sans publicité.</p>
+            <h3 data-fr="Est-ce que Ripple supprime mes morceaux ?" data-en="Does Ripple delete my tracks?">Does Ripple delete my tracks?</h3>
+            <p data-fr="Non, jamais. Ripple ne supprime aucun morceau de votre bibliothèque. Elle vous aide simplement à organiser votre musique plus rapidement." data-en="No, never. Ripple never deletes any tracks from your library. It simply helps you organize your music faster.">No, never. Ripple never deletes any tracks from your library. It simply helps you organize your music faster.</p>
         </div>
         
-        <a href="index.html" class="back" data-fr="← Retour à l'accueil" data-en="← Back to home">← Retour à l'accueil</a>
+        <div class="faq-item">
+            <h3 data-fr="L'application nécessite-t-elle un abonnement Apple Music ?" data-en="Does the app require an Apple Music subscription?">Does the app require an Apple Music subscription?</h3>
+            <p data-fr="Oui, un abonnement Apple Music actif est requis pour utiliser Ripple." data-en="Yes, an active Apple Music subscription is required to use Ripple.">Yes, an active Apple Music subscription is required to use Ripple.</p>
+        </div>
+        
+        <div class="faq-item">
+            <h3 data-fr="Comment supprimer mes données ?" data-en="How do I delete my data?">How do I delete my data?</h3>
+            <p data-fr="Toutes les données sont stockées localement sur votre appareil. Supprimez simplement l'application pour effacer toutes les données." data-en="All data is stored locally on your device. Simply delete the app to erase all data.">All data is stored locally on your device. Simply delete the app to erase all data.</p>
+        </div>
+        
+        <div class="faq-item">
+            <h3 data-fr="L'application est-elle gratuite ?" data-en="Is the app free?">Is the app free?</h3>
+            <p data-fr="Oui, Ripple est entièrement gratuite et sans publicité." data-en="Yes, Ripple is completely free and ad-free.">Yes, Ripple is completely free and ad-free.</p>
+        </div>
     </div>
 
     <script>
@@ -169,8 +195,7 @@
         }
         
         const savedLang = localStorage.getItem('lang');
-        const browserLang = navigator.language.startsWith('fr') ? 'fr' : 'en';
-        setLang(savedLang || browserLang);
+        setLang(savedLang || 'en');
     </script>
 </body>
 </html>

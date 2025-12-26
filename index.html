@@ -4,21 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ripple - Decide your music with a swipe</title>
-    <meta name="description" content="Discover new music made for you, then swipe to organize your library. Save favorites, sort playlists, and build new ones in seconds.">
+    <meta name="description" content="Discover new music made for you, then swipe to organize your library. Save favorites, sort playlists, and build new ones. Free and ad-free.">
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(180deg, #FF002F 0%, #000 50%);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: #000;
             min-height: 100vh;
             color: #fff;
+        }
+        
+        .hero {
+            background: linear-gradient(180deg, #FF002F 0%, #000 60%);
+            padding: 80px 20px 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 60px 20px;
+            text-align: center;
         }
+        
         .lang-switch {
             position: absolute;
             top: 20px;
@@ -26,6 +33,7 @@
             display: flex;
             gap: 8px;
         }
+        
         .lang-btn {
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
@@ -36,130 +44,240 @@
             font-size: 13px;
             transition: all 0.2s;
         }
+        
         .lang-btn:hover { background: rgba(255,255,255,0.2); }
+        
         .lang-btn.active {
             background: rgba(255,255,255,0.2);
             color: #fff;
             border-color: rgba(255,255,255,0.4);
         }
+        
         .logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin-bottom: 24px;
-            box-shadow: 0 20px 60px rgba(255, 0, 47, 0.4);
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 60px rgba(255, 0, 47, 0.5);
         }
+        
         h1 {
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 700;
             letter-spacing: -1px;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
         }
-        .tagline {
-            font-size: 20px;
-            opacity: 0.9;
-            text-align: center;
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-        .subtitle {
-            font-size: 16px;
+        
+        .slogan {
+            font-size: 18px;
             opacity: 0.7;
-            text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 28px;
         }
-        .badge {
-            margin-bottom: 50px;
+        
+        .promo {
+            max-width: 420px;
+            font-size: 17px;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 8px;
         }
-        .badge img {
-            height: 54px;
-        }
-        .description {
-            max-width: 500px;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .description p {
+        
+        .promo-sub {
             font-size: 15px;
-            line-height: 1.7;
-            opacity: 0.85;
+            opacity: 0.7;
+            margin-bottom: 32px;
+        }
+        
+        .badge img {
+            height: 50px;
+        }
+        
+        .content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 50px 24px;
+        }
+        
+        .section {
+            margin-bottom: 48px;
+        }
+        
+        .section h2 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #FF002F;
             margin-bottom: 16px;
         }
-        .description .highlight {
-            opacity: 1;
+        
+        .section p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 16px;
+        }
+        
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .highlight {
+            color: #fff;
             font-weight: 500;
         }
-        .features {
-            max-width: 500px;
-            text-align: center;
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
         }
-        .features h2 {
-            font-size: 22px;
-            margin-bottom: 20px;
-            opacity: 0.9;
+        
+        @media (max-width: 500px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
-        .features ul {
-            list-style: none;
-            text-align: left;
+        
+        .feature {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 16px;
         }
-        .features li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            font-size: 15px;
-            opacity: 0.85;
+        
+        .feature-icon {
+            font-size: 20px;
+            margin-bottom: 8px;
         }
-        .features li:last-child { border: none; }
-        .links {
-            margin-top: 50px;
+        
+        .feature-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.4;
+        }
+        
+        .footer-info {
             display: flex;
-            gap: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            margin-bottom: 48px;
         }
-        .links a {
+        
+        .footer-info span {
+            font-size: 13px;
             color: rgba(255,255,255,0.6);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .footer-info .dot {
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+        }
+        
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            padding-bottom: 40px;
+        }
+        
+        .links a {
+            color: rgba(255,255,255,0.5);
             text-decoration: none;
             font-size: 14px;
+            transition: color 0.2s;
         }
-        .links a:hover { color: #fff; }
+        
+        .links a:hover {
+            color: #fff;
+        }
     </style>
 </head>
 <body>
-    <div class="lang-switch">
-        <button class="lang-btn" onclick="setLang('fr')">FR</button>
-        <button class="lang-btn active" onclick="setLang('en')">EN</button>
-    </div>
-
-    <img src="icon.png" alt="Ripple" class="logo">
-    <h1>Ripple</h1>
-    <p class="tagline" data-fr="Découvre de nouvelles musiques faites pour toi,<br>puis swipe pour organiser ta bibliothèque." data-en="Discover new music made for you,<br>then swipe to organize your library.">Discover new music made for you,<br>then swipe to organize your library.</p>
-    <p class="subtitle" data-fr="Trie tes playlists, garde tes favoris et crée-en de nouvelles." data-en="Save favorites, sort playlists, and build new ones in seconds.">Save favorites, sort playlists, and build new ones in seconds.</p>
-    
-    <div class="badge">
-        <a href="https://apps.apple.com/app/ripple" target="_blank">
-            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store">
-        </a>
-    </div>
-
-    <div class="description">
-        <p data-fr="Lance le swipe et fais confiance à ton instinct.<br>Un morceau arrive, tu écoutes, tu swipes." data-en="Start swiping and act on instinct.<br>A track plays, you listen, you swipe.">Start swiping and act on instinct.<br>A track plays, you listen, you swipe.</p>
-        <p data-fr="Choisis entre le mode <strong>Favoris</strong> et le mode <strong>Ajout à une playlist</strong> avant de commencer." data-en="Choose between <strong>Favorites</strong> mode and <strong>Add to Playlist</strong> mode before you start.">Choose between <strong>Favorites</strong> mode and <strong>Add to Playlist</strong> mode before you start.</p>
-        <p class="highlight" data-fr="Ripple ne supprime aucun morceau.<br>Elle t'aide simplement à décider plus vite." data-en="Ripple never deletes your music.<br>It simply helps you decide faster.">Ripple never deletes your music.<br>It simply helps you decide faster.</p>
+    <div class="hero">
+        <div class="lang-switch">
+            <button class="lang-btn" onclick="setLang('fr')">FR</button>
+            <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        </div>
+        
+        <img src="icon.png" alt="Ripple" class="logo">
+        <h1>Ripple</h1>
+        <p class="slogan" data-fr="Décide ta musique d'un swipe" data-en="Decide your music with a swipe">Decide your music with a swipe</p>
+        
+        <p class="promo" data-fr="Découvre de nouvelles musiques faites pour toi, puis swipe pour organiser ta bibliothèque." data-en="Discover new music made for you, then swipe to organize your library.">Discover new music made for you, then swipe to organize your library.</p>
+        <p class="promo-sub" data-fr="Trie tes playlists et ajoute des favoris. Gratuit et sans pub." data-en="Save favorites, sort playlists, and build new ones. Free and ad-free.">Save favorites, sort playlists, and build new ones. Free and ad-free.</p>
+        
+        <div class="badge">
+            <a href="https://apps.apple.com/app/ripple" target="_blank">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store">
+            </a>
+        </div>
     </div>
     
-    <div class="features">
-        <h2 data-fr="Fonctionnalités" data-en="Features">Features</h2>
-        <ul>
-            <li data-fr="🎵 Découvre des recommandations Apple Music personnalisées" data-en="🎵 Discover personalized Apple Music recommendations">🎵 Discover personalized Apple Music recommendations</li>
-            <li data-fr="⭐ Mode Favoris : swipe à droite pour sauvegarder" data-en="⭐ Favorites mode: swipe right to save">⭐ Favorites mode: swipe right to save</li>
-            <li data-fr="📝 Mode Playlist : ajoute directement à une playlist" data-en="📝 Playlist mode: add directly to a playlist">📝 Playlist mode: add directly to a playlist</li>
-            <li data-fr="🎧 Écoute un extrait avant chaque décision" data-en="🎧 Listen to a preview before every decision">🎧 Listen to a preview before every decision</li>
-            <li data-fr="📊 Trie par titre, artiste, album ou ordre playlist" data-en="📊 Sort by title, artist, album or playlist order">📊 Sort by title, artist, album or playlist order</li>
-            <li data-fr="✨ Interface épurée inspirée d'Apple Music" data-en="✨ Clean interface inspired by Apple Music">✨ Clean interface inspired by Apple Music</li>
-        </ul>
-    </div>
-    
-    <div class="links">
-        <a href="privacy.html" data-fr="Politique de confidentialité" data-en="Privacy Policy">Privacy Policy</a>
-        <a href="support.html" data-fr="Support" data-en="Support">Support</a>
+    <div class="content">
+        <div class="section">
+            <h2 data-fr="Comment ça marche" data-en="How it works">How it works</h2>
+            <p data-fr="Découvre des recommandations Apple Music personnalisées ou explore ta bibliothèque. Lance le swipe et fais confiance à ton instinct. <span class='highlight'>Un morceau arrive, tu écoutes, tu swipes.</span>" data-en="Discover personalized Apple Music recommendations or explore your own library. Start swiping and act on instinct. <span class='highlight'>A track plays, you listen, you swipe.</span>">Discover personalized Apple Music recommendations or explore your own library. Start swiping and act on instinct. <span class="highlight">A track plays, you listen, you swipe.</span></p>
+            <p data-fr="Utilise Ripple pour trier tes playlists, gérer tes favoris ou créer de nouvelles playlists à la volée. Choisis entre le mode <span class='highlight'>Favoris</span> et le mode <span class='highlight'>Ajout à une playlist</span> avant de commencer." data-en="Use Ripple to sort your playlists, save favorites, or build new playlists on the fly. Choose between <span class='highlight'>Favorites</span> mode and <span class='highlight'>Add to Playlist</span> mode before you start.">Use Ripple to sort your playlists, save favorites, or build new playlists on the fly. Choose between <span class="highlight">Favorites</span> mode and <span class="highlight">Add to Playlist</span> mode before you start.</p>
+        </div>
+        
+        <div class="section">
+            <h2 data-fr="Fonctionnalités" data-en="Features">Features</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">🎵</div>
+                    <div class="feature-text" data-fr="Recommandations personnalisées" data-en="Personalized recommendations">Personalized recommendations</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⭐</div>
+                    <div class="feature-text" data-fr="Mode Favoris" data-en="Favorites mode">Favorites mode</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📝</div>
+                    <div class="feature-text" data-fr="Mode Ajout à une playlist" data-en="Add to Playlist mode">Add to Playlist mode</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎧</div>
+                    <div class="feature-text" data-fr="Aperçu audio avant de décider" data-en="Audio preview before deciding">Audio preview before deciding</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text" data-fr="Tri par titre, artiste, album" data-en="Sort by title, artist, album">Sort by title, artist, album</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌙</div>
+                    <div class="feature-text" data-fr="Mode sombre et clair" data-en="Dark and light mode">Dark and light mode</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 data-fr="Philosophie" data-en="Philosophy">Philosophy</h2>
+            <p data-fr="Écoute un extrait avant chaque décision et garde le contrôle de ta musique dans une interface épurée, fluide et inspirée d'Apple Music." data-en="Listen to a preview before every decision and keep full control of your music in a clean, fluid interface inspired by Apple Music.">Listen to a preview before every decision and keep full control of your music in a clean, fluid interface inspired by Apple Music.</p>
+            <p data-fr="<span class='highlight'>Ripple ne supprime aucun morceau.</span> Elle t'aide simplement à décider plus vite." data-en="<span class='highlight'>Ripple never deletes your music.</span> It simply helps you decide faster."><span class="highlight">Ripple never deletes your music.</span> It simply helps you decide faster.</p>
+        </div>
+        
+        <div class="footer-info">
+            <span data-fr="✓ Gratuit" data-en="✓ Free">✓ Free</span>
+            <span class="dot"></span>
+            <span data-fr="✓ Sans publicité" data-en="✓ Ad-free">✓ Ad-free</span>
+            <span class="dot"></span>
+            <span data-fr="✓ Mode sombre" data-en="✓ Dark mode">✓ Dark mode</span>
+            <span class="dot"></span>
+            <span data-fr="Requiert Apple Music" data-en="Requires Apple Music">Requires Apple Music</span>
+        </div>
+        
+        <div class="links">
+            <a href="privacy.html" data-fr="Confidentialité" data-en="Privacy">Privacy</a>
+            <a href="support.html" data-fr="Support" data-en="Support">Support</a>
+        </div>
     </div>
 
     <script>
