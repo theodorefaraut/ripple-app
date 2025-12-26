@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ripple - Sort your playlists with a swipe</title>
+    <title>Ripple - Decide your music with a swipe</title>
+    <meta name="description" content="Discover new music made for you, then swipe to organize your library. Save favorites, sort playlists, and build new ones in seconds.">
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon.png">
     <style>
@@ -52,27 +53,50 @@
             font-size: 48px;
             font-weight: 700;
             letter-spacing: -1px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
         .tagline {
             font-size: 20px;
-            opacity: 0.8;
+            opacity: 0.9;
+            text-align: center;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.7;
             text-align: center;
             margin-bottom: 40px;
         }
         .badge {
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
         .badge img {
             height: 54px;
+        }
+        .description {
+            max-width: 500px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .description p {
+            font-size: 15px;
+            line-height: 1.7;
+            opacity: 0.85;
+            margin-bottom: 16px;
+        }
+        .description .highlight {
+            opacity: 1;
+            font-weight: 500;
         }
         .features {
             max-width: 500px;
             text-align: center;
         }
         .features h2 {
-            font-size: 24px;
+            font-size: 22px;
             margin-bottom: 20px;
+            opacity: 0.9;
         }
         .features ul {
             list-style: none;
@@ -81,11 +105,12 @@
         .features li {
             padding: 12px 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            font-size: 16px;
+            font-size: 15px;
+            opacity: 0.85;
         }
         .features li:last-child { border: none; }
         .links {
-            margin-top: 60px;
+            margin-top: 50px;
             display: flex;
             gap: 30px;
         }
@@ -105,25 +130,30 @@
 
     <img src="icon.png" alt="Ripple" class="logo">
     <h1>Ripple</h1>
-    <p class="tagline" data-fr="Trie tes playlists<br>en un swipe" data-en="Sort your playlists<br>with a swipe">Sort your playlists<br>with a swipe</p>
+    <p class="tagline" data-fr="Découvre de nouvelles musiques faites pour toi,<br>puis swipe pour organiser ta bibliothèque." data-en="Discover new music made for you,<br>then swipe to organize your library.">Discover new music made for you,<br>then swipe to organize your library.</p>
+    <p class="subtitle" data-fr="Trie tes playlists, garde tes favoris et crée-en de nouvelles." data-en="Save favorites, sort playlists, and build new ones in seconds.">Save favorites, sort playlists, and build new ones in seconds.</p>
     
     <div class="badge">
         <a href="https://apps.apple.com/app/ripple" target="_blank">
             <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store">
         </a>
     </div>
+
+    <div class="description">
+        <p data-fr="Lance le swipe et fais confiance à ton instinct.<br>Un morceau arrive, tu écoutes, tu swipes." data-en="Start swiping and act on instinct.<br>A track plays, you listen, you swipe.">Start swiping and act on instinct.<br>A track plays, you listen, you swipe.</p>
+        <p data-fr="Choisis entre le mode <strong>Favoris</strong> et le mode <strong>Ajout à une playlist</strong> avant de commencer." data-en="Choose between <strong>Favorites</strong> mode and <strong>Add to Playlist</strong> mode before you start.">Choose between <strong>Favorites</strong> mode and <strong>Add to Playlist</strong> mode before you start.</p>
+        <p class="highlight" data-fr="Ripple ne supprime aucun morceau.<br>Elle t'aide simplement à décider plus vite." data-en="Ripple never deletes your music.<br>It simply helps you decide faster.">Ripple never deletes your music.<br>It simply helps you decide faster.</p>
+    </div>
     
     <div class="features">
         <h2 data-fr="Fonctionnalités" data-en="Features">Features</h2>
         <ul>
-            <li data-fr="⭐ Swipe à droite pour ajouter aux favoris" data-en="⭐ Swipe right to add to favorites">⭐ Swipe right to add to favorites</li>
-            <li data-fr="📝 Ou ajoute directement à une playlist de ton choix" data-en="📝 Or add directly to a playlist of your choice">📝 Or add directly to a playlist of your choice</li>
-            <li data-fr="⏭️ Swipe à gauche pour passer au suivant" data-en="⏭️ Swipe left to skip">⏭️ Swipe left to skip</li>
-            <li data-fr="🎧 Écoute un aperçu avant de décider" data-en="🎧 Listen to a preview before deciding">🎧 Listen to a preview before deciding</li>
-            <li data-fr="✨ Découvre des playlists recommandées pour toi" data-en="✨ Discover playlists recommended for you">✨ Discover playlists recommended for you</li>
-            <li data-fr="➕ Ajoute des morceaux à n'importe quelle playlist en un tap" data-en="➕ Add tracks to any playlist with one tap">➕ Add tracks to any playlist with one tap</li>
+            <li data-fr="🎵 Découvre des recommandations Apple Music personnalisées" data-en="🎵 Discover personalized Apple Music recommendations">🎵 Discover personalized Apple Music recommendations</li>
+            <li data-fr="⭐ Mode Favoris : swipe à droite pour sauvegarder" data-en="⭐ Favorites mode: swipe right to save">⭐ Favorites mode: swipe right to save</li>
+            <li data-fr="📝 Mode Playlist : ajoute directement à une playlist" data-en="📝 Playlist mode: add directly to a playlist">📝 Playlist mode: add directly to a playlist</li>
+            <li data-fr="🎧 Écoute un extrait avant chaque décision" data-en="🎧 Listen to a preview before every decision">🎧 Listen to a preview before every decision</li>
             <li data-fr="📊 Trie par titre, artiste, album ou ordre playlist" data-en="📊 Sort by title, artist, album or playlist order">📊 Sort by title, artist, album or playlist order</li>
-            <li data-fr="🌙 Mode sombre et clair" data-en="🌙 Dark and light mode">🌙 Dark and light mode</li>
+            <li data-fr="✨ Interface épurée inspirée d'Apple Music" data-en="✨ Clean interface inspired by Apple Music">✨ Clean interface inspired by Apple Music</li>
         </ul>
     </div>
     
@@ -143,7 +173,6 @@
             localStorage.setItem('lang', lang);
         }
         
-        // Load saved language or default to English
         const savedLang = localStorage.getItem('lang');
         setLang(savedLang || 'en');
     </script>
