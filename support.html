@@ -8,24 +8,56 @@
     <link rel="apple-touch-icon" href="icon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
             background: #000;
             color: #fff;
             line-height: 1.7;
-            padding: 40px 20px;
         }
-        .lang-switch {
+        
+        .nav {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 24px;
             display: flex;
-            gap: 8px;
+            justify-content: space-between;
+            align-items: center;
             z-index: 100;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .nav-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+        
+        .nav-logo span {
+            font-weight: 600;
+            font-size: 17px;
+        }
+        
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+        }
+        
         .lang-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
             color: rgba(255,255,255,0.6);
             padding: 6px 12px;
             border-radius: 20px;
@@ -33,153 +65,225 @@
             font-size: 13px;
             transition: all 0.2s;
         }
-        .lang-btn:hover { background: rgba(255,255,255,0.2); }
+        
+        .lang-btn:hover { background: rgba(255,255,255,0.15); }
+        
         .lang-btn.active {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
             color: #fff;
-            border-color: rgba(255,255,255,0.4);
+            border-color: rgba(255,255,255,0.25);
         }
+        
         .container {
-            max-width: 640px;
+            max-width: 900px;
             margin: 0 auto;
+            padding: 100px 24px 60px;
         }
-        .back {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #FF002F;
-            text-decoration: none;
-            font-size: 14px;
-            margin-bottom: 32px;
+        
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
         }
-        .back:hover { text-decoration: underline; }
-        h1 {
-            font-size: 32px;
+        
+        .header h1 {
+            font-size: 36px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
-        .intro {
-            color: rgba(255,255,255,0.7);
-            font-size: 15px;
-            margin-bottom: 32px;
+        
+        .header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 17px;
         }
-        h2 {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #FF002F;
-            margin-top: 32px;
-            margin-bottom: 16px;
-        }
-        .contact-box {
-            background: rgba(255,255,255,0.05);
+        
+        /* Contact Card */
+        .contact-card {
+            background: linear-gradient(135deg, rgba(255,0,47,0.1) 0%, rgba(0,0,0,0) 60%);
             border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 8px;
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 48px;
         }
-        .contact-box p {
-            margin: 0;
-            font-size: 15px;
+        
+        .contact-card h2 {
+            font-size: 20px;
+            margin-bottom: 12px;
         }
-        .contact-box a {
+        
+        .contact-card a {
             color: #FF002F;
             text-decoration: none;
+            font-size: 17px;
         }
-        .contact-box a:hover { text-decoration: underline; }
-        .faq-item {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 10px;
+        
+        .contact-card a:hover {
+            text-decoration: underline;
         }
-        .faq-item h3 {
-            font-size: 15px;
+        
+        /* Section */
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #FF002F;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        /* Bento Grid */
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.2s;
+        }
+        
+        .card:hover {
+            background: rgba(255,255,255,0.06);
+        }
+        
+        .card-full {
+            grid-column: span 2;
+        }
+        
+        .card h3 {
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #fff;
         }
-        .faq-item p {
+        
+        .card p {
             font-size: 14px;
-            margin: 0;
             color: rgba(255,255,255,0.7);
             line-height: 1.6;
+        }
+        
+        .card strong {
+            color: #fff;
+        }
+        
+        @media (max-width: 700px) {
+            .bento {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-full {
+                grid-column: span 1;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="lang-switch">
-        <button class="lang-btn" onclick="setLang('fr')">FR</button>
-        <button class="lang-btn active" onclick="setLang('en')">EN</button>
-    </div>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="icon.png" alt="Ripple">
+            <span>Ripple</span>
+        </a>
+        <div class="lang-switch">
+            <button class="lang-btn" onclick="setLang('fr')">FR</button>
+            <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        </div>
+    </nav>
 
     <div class="container">
-        <a href="index.html" class="back" data-fr="← Retour" data-en="← Back">← Back</a>
-        
-        <h1>Support</h1>
-        <p class="intro" data-fr="Besoin d'aide avec Ripple ? Nous sommes là pour vous." data-en="Need help with Ripple? We're here for you.">Need help with Ripple? We're here for you.</p>
-        
-        <h2>Contact</h2>
-        <div class="contact-box">
-            <p>📧 <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
+        <div class="header">
+            <h1>Support</h1>
+            <p data-fr="Besoin d'aide avec Ripple ?" data-en="Need help with Ripple?">Need help with Ripple?</p>
         </div>
         
-        <h2 data-fr="Questions fréquentes" data-en="FAQ">FAQ</h2>
-        
-        <div class="faq-item">
-            <h3 data-fr="Pourquoi dois-je autoriser l'accès à Apple Music ?" data-en="Why do I need to authorize access to Apple Music?">Why do I need to authorize access to Apple Music?</h3>
-            <p data-fr="Ripple a besoin d'accéder à votre bibliothèque pour afficher vos playlists, les recommandations et vous permettre d'ajouter des morceaux à vos favoris ou playlists." data-en="Ripple needs to access your library to display your playlists, recommendations, and allow you to add tracks to your favorites or playlists.">Ripple needs to access your library to display your playlists, recommendations, and allow you to add tracks to your favorites or playlists.</p>
+        <div class="contact-card">
+            <h2 data-fr="Contactez-nous" data-en="Contact us">Contact us</h2>
+            <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a>
         </div>
         
-        <div class="faq-item">
-            <h3 data-fr="Quelle est la différence entre les deux modes ?" data-en="What's the difference between the two modes?">What's the difference between the two modes?</h3>
-            <p data-fr="<strong>Mode Favoris :</strong> swipe à droite ajoute le morceau à vos favoris Apple Music.<br><strong>Mode Ajout à une playlist :</strong> swipe à droite ajoute le morceau à une playlist de votre choix." data-en="<strong>Favorites mode:</strong> swipe right adds the track to your Apple Music favorites.<br><strong>Add to Playlist mode:</strong> swipe right adds the track to a playlist of your choice."><strong>Favorites mode:</strong> swipe right adds the track to your Apple Music favorites.<br><strong>Add to Playlist mode:</strong> swipe right adds the track to a playlist of your choice.</p>
+        <!-- Getting Started -->
+        <div class="section">
+            <div class="section-label" data-fr="Démarrage" data-en="Getting started">Getting started</div>
+            <div class="bento">
+                <div class="card">
+                    <h3 data-fr="Pourquoi autoriser Apple Music ?" data-en="Why authorize Apple Music?">Why authorize Apple Music?</h3>
+                    <p data-fr="Ripple a besoin d'accéder à votre bibliothèque pour afficher vos playlists et vous permettre d'ajouter des titres." data-en="Ripple needs access to your library to display your playlists and let you add tracks.">Ripple needs access to your library to display your playlists and let you add tracks.</p>
+                </div>
+                <div class="card">
+                    <h3 data-fr="Abonnement requis ?" data-en="Subscription required?">Subscription required?</h3>
+                    <p data-fr="Oui, un abonnement Apple Music actif est nécessaire pour utiliser Ripple." data-en="Yes, an active Apple Music subscription is required to use Ripple.">Yes, an active Apple Music subscription is required to use Ripple.</p>
+                </div>
+            </div>
         </div>
         
-        <div class="faq-item">
-            <h3 data-fr="Comment changer le mode de swipe ?" data-en="How do I change the swipe mode?">How do I change the swipe mode?</h3>
-            <p data-fr="Appuyez sur l'icône main (🖐️) en haut de l'écran. Vous pouvez choisir entre le mode Favoris ou Ajout à une playlist, et sélectionner la playlist cible." data-en="Tap the hand icon (🖐️) at the top of the screen. You can choose between Favorites mode or Add to Playlist mode, and select the target playlist.">Tap the hand icon (🖐️) at the top of the screen. You can choose between Favorites mode or Add to Playlist mode, and select the target playlist.</p>
+        <!-- Modes -->
+        <div class="section">
+            <div class="section-label" data-fr="Modes" data-en="Modes">Modes</div>
+            <div class="bento">
+                <div class="card">
+                    <h3 data-fr="Les deux modes" data-en="The two modes">The two modes</h3>
+                    <p data-fr="<strong>Favoris :</strong> swipe à droite ajoute aux favoris.<br><strong>Playlist :</strong> swipe à droite ajoute à une playlist de votre choix." data-en="<strong>Favorites:</strong> swipe right adds to favorites.<br><strong>Playlist:</strong> swipe right adds to a playlist of your choice."><strong>Favorites:</strong> swipe right adds to favorites.<br><strong>Playlist:</strong> swipe right adds to a playlist of your choice.</p>
+                </div>
+                <div class="card">
+                    <h3 data-fr="Changer de mode" data-en="Change mode">Change mode</h3>
+                    <p data-fr="Appuyez sur l'icône main en haut de l'écran. Choisissez Favoris ou Playlist, puis sélectionnez la playlist cible." data-en="Tap the hand icon at the top of the screen. Choose Favorites or Playlist, then select the target playlist.">Tap the hand icon at the top of the screen. Choose Favorites or Playlist, then select the target playlist.</p>
+                </div>
+            </div>
         </div>
         
-        <div class="faq-item">
-            <h3 data-fr="Comment ajouter un morceau à une playlist spécifique ?" data-en="How do I add a track to a specific playlist?">How do I add a track to a specific playlist?</h3>
-            <p data-fr="Depuis la liste des morceaux, appuyez sur l'icône + à côté du cœur. Vous pourrez choisir une playlist existante ou en créer une nouvelle." data-en="From the track list, tap the + icon next to the heart. You can choose an existing playlist or create a new one.">From the track list, tap the + icon next to the heart. You can choose an existing playlist or create a new one.</p>
+        <!-- Common Questions -->
+        <div class="section">
+            <div class="section-label" data-fr="Questions courantes" data-en="Common questions">Common questions</div>
+            <div class="bento">
+                <div class="card">
+                    <h3 data-fr="C'est quoi « Pour vous » ?" data-en="What is 'For You'?">What is "For You"?</h3>
+                    <p data-fr="Des playlists recommandées par Apple Music selon vos goûts. Idéal pour découvrir de nouveaux titres." data-en="Playlists recommended by Apple Music based on your taste. Great for discovering new tracks.">Playlists recommended by Apple Music based on your taste. Great for discovering new tracks.</p>
+                </div>
+                <div class="card">
+                    <h3 data-fr="Titres grisés ?" data-en="Grayed out tracks?">Grayed out tracks?</h3>
+                    <p data-fr="Ce sont les titres déjà traités. Ils restent visibles et interactifs." data-en="These are tracks you've already processed. They remain visible and interactive.">These are tracks you've already processed. They remain visible and interactive.</p>
+                </div>
+                <div class="card">
+                    <h3 data-fr="Nouvelle playlist invisible ?" data-en="New playlist not showing?">New playlist not showing?</h3>
+                    <p data-fr="Les playlists créées récemment peuvent mettre quelques minutes à apparaître. Tirez vers le bas pour actualiser." data-en="Recently created playlists may take a few minutes to appear. Pull down to refresh.">Recently created playlists may take a few minutes to appear. Pull down to refresh.</p>
+                </div>
+                <div class="card">
+                    <h3 data-fr="Ajouter à une playlist spécifique ?" data-en="Add to a specific playlist?">Add to a specific playlist?</h3>
+                    <p data-fr="Depuis la liste des titres, appuyez sur + à côté du cœur. Choisissez une playlist ou créez-en une nouvelle." data-en="From the track list, tap + next to the heart. Choose a playlist or create a new one.">From the track list, tap + next to the heart. Choose a playlist or create a new one.</p>
+                </div>
+            </div>
         </div>
         
-        <div class="faq-item">
-            <h3 data-fr="C'est quoi la section « Pour vous » ?" data-en="What is the 'For You' section?">What is the "For You" section?</h3>
-            <p data-fr="Cette section affiche des playlists recommandées par Apple Music en fonction de vos goûts musicaux. Parfait pour découvrir de nouveaux morceaux !" data-en="This section displays playlists recommended by Apple Music based on your music tastes. Perfect for discovering new tracks!">This section displays playlists recommended by Apple Music based on your music tastes. Perfect for discovering new tracks!</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3 data-fr="Pourquoi certains morceaux sont grisés ?" data-en="Why are some tracks grayed out?">Why are some tracks grayed out?</h3>
-            <p data-fr="Les morceaux grisés sont ceux que vous avez déjà traités (swipés). Ils restent visibles pour référence et vous pouvez toujours interagir avec." data-en="Grayed out tracks are those you've already processed (swiped). They remain visible for reference and you can still interact with them.">Grayed out tracks are those you've already processed (swiped). They remain visible for reference and you can still interact with them.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3 data-fr="Mes playlists créées n'apparaissent pas" data-en="My created playlists don't appear">My created playlists don't appear</h3>
-            <p data-fr="Les playlists créées récemment peuvent mettre quelques minutes avant d'apparaître (limitation Apple Music). Tirez vers le bas pour actualiser." data-en="Recently created playlists may take a few minutes to appear (Apple Music limitation). Pull down to refresh.">Recently created playlists may take a few minutes to appear (Apple Music limitation). Pull down to refresh.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3 data-fr="Est-ce que Ripple supprime mes morceaux ?" data-en="Does Ripple delete my tracks?">Does Ripple delete my tracks?</h3>
-            <p data-fr="Non, jamais. Ripple ne supprime aucun morceau de votre bibliothèque. Elle vous aide simplement à organiser votre musique plus rapidement." data-en="No, never. Ripple never deletes any tracks from your library. It simply helps you organize your music faster.">No, never. Ripple never deletes any tracks from your library. It simply helps you organize your music faster.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3 data-fr="L'application nécessite-t-elle un abonnement Apple Music ?" data-en="Does the app require an Apple Music subscription?">Does the app require an Apple Music subscription?</h3>
-            <p data-fr="Oui, un abonnement Apple Music actif est requis pour utiliser Ripple." data-en="Yes, an active Apple Music subscription is required to use Ripple.">Yes, an active Apple Music subscription is required to use Ripple.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3 data-fr="Comment supprimer mes données ?" data-en="How do I delete my data?">How do I delete my data?</h3>
-            <p data-fr="Toutes les données sont stockées localement sur votre appareil. Supprimez simplement l'application pour effacer toutes les données." data-en="All data is stored locally on your device. Simply delete the app to erase all data.">All data is stored locally on your device. Simply delete the app to erase all data.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3 data-fr="L'application est-elle gratuite ?" data-en="Is the app free?">Is the app free?</h3>
-            <p data-fr="Oui, Ripple est entièrement gratuite et sans publicité." data-en="Yes, Ripple is completely free and ad-free.">Yes, Ripple is completely free and ad-free.</p>
+        <!-- Trust -->
+        <div class="section">
+            <div class="section-label" data-fr="Sécurité" data-en="Trust">Trust</div>
+            <div class="bento">
+                <div class="card">
+                    <h3 data-fr="Ripple supprime mes titres ?" data-en="Does Ripple delete my tracks?">Does Ripple delete my tracks?</h3>
+                    <p data-fr="Non, jamais. Ripple ne supprime aucun titre. Elle vous aide à décider plus vite." data-en="No, never. Ripple never deletes any tracks. It helps you decide faster.">No, never. Ripple never deletes any tracks. It helps you decide faster.</p>
+                </div>
+                <div class="card">
+                    <h3 data-fr="Supprimer mes données ?" data-en="Delete my data?">Delete my data?</h3>
+                    <p data-fr="Toutes les données sont locales. Supprimez l'app pour tout effacer." data-en="All data is local. Delete the app to erase everything.">All data is local. Delete the app to erase everything.</p>
+                </div>
+                <div class="card card-full">
+                    <h3 data-fr="L'app est gratuite ?" data-en="Is the app free?">Is the app free?</h3>
+                    <p data-fr="Oui. Ripple est gratuite et sans publicité." data-en="Yes. Ripple is free and ad-free.">Yes. Ripple is free and ad-free.</p>
+                </div>
+            </div>
         </div>
     </div>
 

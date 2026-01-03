@@ -8,24 +8,56 @@
     <link rel="apple-touch-icon" href="icon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
             background: #000;
             color: #fff;
             line-height: 1.7;
-            padding: 40px 20px;
         }
-        .lang-switch {
+        
+        .nav {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 24px;
             display: flex;
-            gap: 8px;
+            justify-content: space-between;
+            align-items: center;
             z-index: 100;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .nav-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+        
+        .nav-logo span {
+            font-weight: 600;
+            font-size: 17px;
+        }
+        
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+        }
+        
         .lang-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
             color: rgba(255,255,255,0.6);
             padding: 6px 12px;
             border-radius: 20px;
@@ -33,119 +65,208 @@
             font-size: 13px;
             transition: all 0.2s;
         }
-        .lang-btn:hover { background: rgba(255,255,255,0.2); }
+        
+        .lang-btn:hover { background: rgba(255,255,255,0.15); }
+        
         .lang-btn.active {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
             color: #fff;
-            border-color: rgba(255,255,255,0.4);
+            border-color: rgba(255,255,255,0.25);
         }
+        
         .container {
-            max-width: 640px;
+            max-width: 720px;
             margin: 0 auto;
+            padding: 100px 24px 60px;
         }
-        .back {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #FF002F;
-            text-decoration: none;
-            font-size: 14px;
-            margin-bottom: 32px;
+        
+        .header {
+            margin-bottom: 48px;
         }
-        .back:hover { text-decoration: underline; }
-        h1 {
-            font-size: 32px;
+        
+        .header h1 {
+            font-size: 36px;
             font-weight: 700;
             margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
-        .date {
+        
+        .header .date {
             color: rgba(255,255,255,0.5);
             font-size: 14px;
-            margin-bottom: 40px;
         }
-        h2 {
-            font-size: 13px;
+        
+        /* Bento Cards */
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 24px;
+        }
+        
+        .card-full {
+            grid-column: span 2;
+        }
+        
+        .card-highlight {
+            background: linear-gradient(135deg, rgba(52,199,89,0.1) 0%, rgba(0,0,0,0) 60%);
+        }
+        
+        .card-label {
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             color: #FF002F;
-            margin-top: 32px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .card h2 {
+            font-size: 18px;
+            font-weight: 600;
             margin-bottom: 12px;
         }
-        p {
-            margin-bottom: 16px;
-            color: rgba(255,255,255,0.85);
+        
+        .card p {
             font-size: 15px;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 12px;
         }
-        ul {
-            margin-left: 20px;
-            margin-bottom: 16px;
+        
+        .card p:last-child {
+            margin-bottom: 0;
         }
-        li {
-            margin-bottom: 8px;
-            color: rgba(255,255,255,0.85);
+        
+        .card ul {
+            list-style: none;
+            margin: 0;
+        }
+        
+        .card li {
             font-size: 15px;
+            color: rgba(255,255,255,0.75);
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
         }
-        a {
+        
+        .card li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #FF002F;
+        }
+        
+        .card a {
             color: #FF002F;
             text-decoration: none;
         }
-        a:hover { text-decoration: underline; }
-        strong { color: #fff; }
+        
+        .card a:hover {
+            text-decoration: underline;
+        }
+        
+        .highlight-text {
+            color: #34C759;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 600px) {
+            .bento {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-full {
+                grid-column: span 1;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="lang-switch">
-        <button class="lang-btn" onclick="setLang('fr')">FR</button>
-        <button class="lang-btn active" onclick="setLang('en')">EN</button>
-    </div>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="icon.png" alt="Ripple">
+            <span>Ripple</span>
+        </a>
+        <div class="lang-switch">
+            <button class="lang-btn" onclick="setLang('fr')">FR</button>
+            <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        </div>
+    </nav>
 
     <div class="container">
-        <a href="index.html" class="back" data-fr="← Retour" data-en="← Back">← Back</a>
+        <div class="header">
+            <h1 data-fr="Confidentialité" data-en="Privacy Policy">Privacy Policy</h1>
+            <p class="date" data-fr="Dernière mise à jour : Décembre 2025" data-en="Last updated: December 2025">Last updated: December 2025</p>
+        </div>
         
-        <h1 data-fr="Politique de confidentialité" data-en="Privacy Policy">Privacy Policy</h1>
-        <p class="date" data-fr="Dernière mise à jour : Décembre 2025" data-en="Last updated: December 2025">Last updated: December 2025</p>
-        
-        <h2 data-fr="Introduction" data-en="Introduction">Introduction</h2>
-        <p data-fr="Ripple (« l'Application ») respecte votre vie privée. Cette politique explique comment nous traitons vos données." data-en="Ripple ("the App") respects your privacy. This policy explains how we handle your data.">Ripple ("the App") respects your privacy. This policy explains how we handle your data.</p>
-        
-        <h2 data-fr="Données collectées" data-en="Data collected">Data collected</h2>
-        <p data-fr="<strong>Ripple ne collecte aucune donnée personnelle.</strong>" data-en="<strong>Ripple does not collect any personal data.</strong>"><strong>Ripple does not collect any personal data.</strong></p>
-        <p data-fr="L'application accède uniquement à :" data-en="The app only accesses:">The app only accesses:</p>
-        <ul>
-            <li data-fr="Votre bibliothèque Apple Music (playlists, morceaux)" data-en="Your Apple Music library (playlists, tracks)">Your Apple Music library (playlists, tracks)</li>
-            <li data-fr="Vos préférences (tri, thème, langue) stockées localement" data-en="Your preferences (sorting, theme, language) stored locally">Your preferences (sorting, theme, language) stored locally</li>
-        </ul>
-        
-        <h2 data-fr="Utilisation des données" data-en="Data usage">Data usage</h2>
-        <p data-fr="Les données de votre bibliothèque Apple Music sont utilisées uniquement pour :" data-en="Your Apple Music library data is used only to:">Your Apple Music library data is used only to:</p>
-        <ul>
-            <li data-fr="Afficher vos playlists et recommandations" data-en="Display your playlists and recommendations">Display your playlists and recommendations</li>
-            <li data-fr="Vous permettre de trier et parcourir vos morceaux" data-en="Allow you to sort and browse your tracks">Allow you to sort and browse your tracks</li>
-            <li data-fr="Ajouter des morceaux à vos favoris ou playlists" data-en="Add tracks to your favorites or playlists">Add tracks to your favorites or playlists</li>
-            <li data-fr="Créer de nouvelles playlists dans votre bibliothèque" data-en="Create new playlists in your library">Create new playlists in your library</li>
-        </ul>
-        
-        <h2 data-fr="Stockage des données" data-en="Data storage">Data storage</h2>
-        <p data-fr="Toutes les données sont stockées localement sur votre appareil. Aucune donnée n'est envoyée à des serveurs externes, à l'exception des appels à l'API Apple Music pour accéder à votre bibliothèque." data-en="All data is stored locally on your device. No data is sent to external servers, except for calls to the Apple Music API to access your library.">All data is stored locally on your device. No data is sent to external servers, except for calls to the Apple Music API to access your library.</p>
-        
-        <h2 data-fr="Partage des données" data-en="Data sharing">Data sharing</h2>
-        <p data-fr="Ripple ne partage aucune donnée avec des tiers. Nous n'utilisons aucun outil d'analyse ou de suivi." data-en="Ripple does not share any data with third parties. We do not use any analytics or tracking tools.">Ripple does not share any data with third parties. We do not use any analytics or tracking tools.</p>
-        
-        <h2 data-fr="Services tiers" data-en="Third-party services">Third-party services</h2>
-        <p data-fr="L'application utilise l'API Apple MusicKit pour accéder à votre bibliothèque. L'utilisation de ce service est soumise à la <a href='https://www.apple.com/legal/privacy/' target='_blank'>politique de confidentialité d'Apple</a>." data-en="The app uses the Apple MusicKit API to access your library. Use of this service is subject to <a href='https://www.apple.com/legal/privacy/' target='_blank'>Apple's privacy policy</a>.">The app uses the Apple MusicKit API to access your library. Use of this service is subject to <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple's privacy policy</a>.</p>
-        
-        <h2 data-fr="Vos droits" data-en="Your rights">Your rights</h2>
-        <p data-fr="Vous pouvez à tout moment :" data-en="You can at any time:">You can at any time:</p>
-        <ul>
-            <li data-fr="Révoquer l'accès de Ripple à votre bibliothèque Apple Music depuis Réglages > Confidentialité > Multimédia et Apple Music" data-en="Revoke Ripple's access to your Apple Music library from Settings > Privacy > Media & Apple Music">Revoke Ripple's access to your Apple Music library from Settings > Privacy > Media & Apple Music</li>
-            <li data-fr="Supprimer l'application et toutes les données locales associées" data-en="Delete the app and all associated local data">Delete the app and all associated local data</li>
-        </ul>
-        
-        <h2 data-fr="Contact" data-en="Contact">Contact</h2>
-        <p data-fr="Pour toute question concernant cette politique : <a href='mailto:theodore.faraut@gmail.com'>theodore.faraut@gmail.com</a>" data-en="For any questions regarding this policy: <a href='mailto:theodore.faraut@gmail.com'>theodore.faraut@gmail.com</a>">For any questions regarding this policy: <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
-        
-        <h2 data-fr="Modifications" data-en="Changes">Changes</h2>
-        <p data-fr="Cette politique peut être mise à jour. Les modifications seront publiées sur cette page avec une nouvelle date de mise à jour." data-en="This policy may be updated. Changes will be posted on this page with a new update date.">This policy may be updated. Changes will be posted on this page with a new update date.</p>
+        <div class="bento">
+            <!-- Summary -->
+            <div class="card card-full card-highlight">
+                <div class="card-label" data-fr="Résumé" data-en="Summary">Summary</div>
+                <h2 data-fr="Ripple ne collecte aucune donnée personnelle." data-en="Ripple does not collect any personal data.">Ripple does not collect any personal data.</h2>
+                <p data-fr="Pas d'analytics. Pas de tracking. Pas de serveur externe. Vos données restent sur votre appareil." data-en="No analytics. No tracking. No external servers. Your data stays on your device.">No analytics. No tracking. No external servers. Your data stays on your device.</p>
+            </div>
+            
+            <!-- Data accessed -->
+            <div class="card">
+                <div class="card-label" data-fr="Données accédées" data-en="Data accessed">Data accessed</div>
+                <p data-fr="L'app accède uniquement à :" data-en="The app only accesses:">The app only accesses:</p>
+                <ul>
+                    <li data-fr="Votre bibliothèque Apple Music" data-en="Your Apple Music library">Your Apple Music library</li>
+                    <li data-fr="Vos préférences locales" data-en="Your local preferences">Your local preferences</li>
+                </ul>
+            </div>
+            
+            <!-- Data usage -->
+            <div class="card">
+                <div class="card-label" data-fr="Utilisation" data-en="Usage">Usage</div>
+                <p data-fr="Vos données servent à :" data-en="Your data is used to:">Your data is used to:</p>
+                <ul>
+                    <li data-fr="Afficher vos playlists" data-en="Display your playlists">Display your playlists</li>
+                    <li data-fr="Ajouter des titres" data-en="Add tracks">Add tracks</li>
+                    <li data-fr="Créer des playlists" data-en="Create playlists">Create playlists</li>
+                </ul>
+            </div>
+            
+            <!-- Storage -->
+            <div class="card">
+                <div class="card-label" data-fr="Stockage" data-en="Storage">Storage</div>
+                <p data-fr="Toutes les données sont stockées localement sur votre appareil. Seuls les appels à l'API Apple Music sont effectués pour accéder à votre bibliothèque." data-en="All data is stored locally on your device. Only Apple Music API calls are made to access your library.">All data is stored locally on your device. Only Apple Music API calls are made to access your library.</p>
+            </div>
+            
+            <!-- Third parties -->
+            <div class="card">
+                <div class="card-label" data-fr="Tiers" data-en="Third parties">Third parties</div>
+                <p data-fr="Ripple utilise l'API Apple MusicKit. L'utilisation est soumise à la <a href='https://www.apple.com/legal/privacy/' target='_blank'>politique de confidentialité d'Apple</a>." data-en="Ripple uses the Apple MusicKit API. Use is subject to <a href='https://www.apple.com/legal/privacy/' target='_blank'>Apple's privacy policy</a>.">Ripple uses the Apple MusicKit API. Use is subject to <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple's privacy policy</a>.</p>
+            </div>
+            
+            <!-- Your rights -->
+            <div class="card card-full">
+                <div class="card-label" data-fr="Vos droits" data-en="Your rights">Your rights</div>
+                <p data-fr="Vous pouvez à tout moment :" data-en="You can at any time:">You can at any time:</p>
+                <ul>
+                    <li data-fr="Révoquer l'accès depuis Réglages > Confidentialité > Multimédia et Apple Music" data-en="Revoke access from Settings > Privacy > Media & Apple Music">Revoke access from Settings > Privacy > Media & Apple Music</li>
+                    <li data-fr="Supprimer l'app et toutes les données locales" data-en="Delete the app and all local data">Delete the app and all local data</li>
+                </ul>
+            </div>
+            
+            <!-- Contact -->
+            <div class="card card-full">
+                <div class="card-label">Contact</div>
+                <p data-fr="Pour toute question : <a href='mailto:theodore.faraut@gmail.com'>theodore.faraut@gmail.com</a>" data-en="For any questions: <a href='mailto:theodore.faraut@gmail.com'>theodore.faraut@gmail.com</a>">For any questions: <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
+            </div>
+        </div>
     </div>
 
     <script>

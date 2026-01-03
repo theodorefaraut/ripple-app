@@ -8,83 +8,224 @@
     <link rel="apple-touch-icon" href="icon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
             background: #000;
             color: #fff;
             line-height: 1.7;
-            padding: 40px 20px;
         }
-        .container { max-width: 640px; margin: 0 auto; }
-        .back {
-            display: inline-flex;
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 6px;
+            z-index: 100;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .nav-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+        
+        .nav-logo span {
+            font-weight: 600;
+            font-size: 17px;
+        }
+        
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
+        }
+        
+        .header {
+            margin-bottom: 48px;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .header .date {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+        
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 24px;
+        }
+        
+        .card-full {
+            grid-column: span 2;
+        }
+        
+        .card-highlight {
+            background: linear-gradient(135deg, rgba(52,199,89,0.1) 0%, rgba(0,0,0,0) 60%);
+        }
+        
+        .card-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #FF002F;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .card h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .card p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 12px;
+        }
+        
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .card ul {
+            list-style: none;
+            margin: 0;
+        }
+        
+        .card li {
+            font-size: 15px;
+            color: rgba(255,255,255,0.75);
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .card li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #FF002F;
+        }
+        
+        .card a {
             color: #FF002F;
             text-decoration: none;
-            font-size: 14px;
-            margin-bottom: 32px;
         }
-        .back:hover { text-decoration: underline; }
-        h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
-        .date { color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 40px; }
-        h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: #FF002F; margin-top: 32px; margin-bottom: 12px; }
-        p { margin-bottom: 16px; color: rgba(255,255,255,0.85); font-size: 15px; }
-        ul { margin-left: 20px; margin-bottom: 16px; }
-        li { margin-bottom: 8px; color: rgba(255,255,255,0.85); font-size: 15px; }
-        a { color: #FF002F; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        strong { color: #fff; }
+        
+        .card a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .bento {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-full {
+                grid-column: span 1;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 <body>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="icon.png" alt="Ripple">
+            <span>Ripple</span>
+        </a>
+    </nav>
+
     <div class="container">
-        <a href="index.html" class="back">← Retour</a>
+        <div class="header">
+            <h1>Confidentialité</h1>
+            <p class="date">Dernière mise à jour : Décembre 2025</p>
+        </div>
         
-        <h1>Politique de confidentialité</h1>
-        <p class="date">Dernière mise à jour : Décembre 2025</p>
-        
-        <h2>Introduction</h2>
-        <p>Ripple (« l'Application ») respecte votre vie privée. Cette politique explique comment nous traitons vos données.</p>
-        
-        <h2>Données collectées</h2>
-        <p><strong>Ripple ne collecte aucune donnée personnelle.</strong></p>
-        <p>L'application accède uniquement à :</p>
-        <ul>
-            <li>Votre bibliothèque Apple Music (playlists, morceaux)</li>
-            <li>Vos préférences (tri, thème, langue) stockées localement</li>
-        </ul>
-        
-        <h2>Utilisation des données</h2>
-        <p>Les données de votre bibliothèque Apple Music sont utilisées uniquement pour :</p>
-        <ul>
-            <li>Afficher vos playlists et recommandations</li>
-            <li>Vous permettre de trier et parcourir vos morceaux</li>
-            <li>Ajouter des morceaux à vos favoris ou playlists</li>
-            <li>Créer de nouvelles playlists dans votre bibliothèque</li>
-        </ul>
-        
-        <h2>Stockage des données</h2>
-        <p>Toutes les données sont stockées localement sur votre appareil. Aucune donnée n'est envoyée à des serveurs externes, à l'exception des appels à l'API Apple Music pour accéder à votre bibliothèque.</p>
-        
-        <h2>Partage des données</h2>
-        <p>Ripple ne partage aucune donnée avec des tiers. Nous n'utilisons aucun outil d'analyse ou de suivi.</p>
-        
-        <h2>Services tiers</h2>
-        <p>L'application utilise l'API Apple MusicKit pour accéder à votre bibliothèque. L'utilisation de ce service est soumise à la <a href="https://www.apple.com/legal/privacy/" target="_blank">politique de confidentialité d'Apple</a>.</p>
-        
-        <h2>Vos droits</h2>
-        <p>Vous pouvez à tout moment :</p>
-        <ul>
-            <li>Révoquer l'accès de Ripple à votre bibliothèque Apple Music depuis Réglages > Confidentialité > Multimédia et Apple Music</li>
-            <li>Supprimer l'application et toutes les données locales associées</li>
-        </ul>
-        
-        <h2>Contact</h2>
-        <p>Pour toute question concernant cette politique : <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
-        
-        <h2>Modifications</h2>
-        <p>Cette politique peut être mise à jour. Les modifications seront publiées sur cette page avec une nouvelle date de mise à jour.</p>
+        <div class="bento">
+            <div class="card card-full card-highlight">
+                <div class="card-label">Résumé</div>
+                <h2>Ripple ne collecte aucune donnée personnelle.</h2>
+                <p>Pas d'analytics. Pas de tracking. Pas de serveur externe. Vos données restent sur votre appareil.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-label">Données accédées</div>
+                <p>L'app accède uniquement à :</p>
+                <ul>
+                    <li>Votre bibliothèque Apple Music</li>
+                    <li>Vos préférences locales</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <div class="card-label">Utilisation</div>
+                <p>Vos données servent à :</p>
+                <ul>
+                    <li>Afficher vos playlists</li>
+                    <li>Ajouter des titres</li>
+                    <li>Créer des playlists</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <div class="card-label">Stockage</div>
+                <p>Toutes les données sont stockées localement sur votre appareil. Seuls les appels à l'API Apple Music sont effectués pour accéder à votre bibliothèque.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-label">Tiers</div>
+                <p>Ripple utilise l'API Apple MusicKit. L'utilisation est soumise à la <a href="https://www.apple.com/legal/privacy/" target="_blank">politique de confidentialité d'Apple</a>.</p>
+            </div>
+            
+            <div class="card card-full">
+                <div class="card-label">Vos droits</div>
+                <p>Vous pouvez à tout moment :</p>
+                <ul>
+                    <li>Révoquer l'accès depuis Réglages > Confidentialité > Multimédia et Apple Music</li>
+                    <li>Supprimer l'app et toutes les données locales</li>
+                </ul>
+            </div>
+            
+            <div class="card card-full">
+                <div class="card-label">Contact</div>
+                <p>Pour toute question : <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

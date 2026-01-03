@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ripple - Decide your music with a swipe</title>
-    <meta name="description" content="Discover new music made for you, then swipe to organize your library. Save favorites, sort playlists, and build new ones. Free and ad-free.">
+    <title>Ripple - Music choice with a swipe</title>
+    <meta name="description" content="Explore your music and decide faster. Swipe right to add to favorites or a playlist. Swipe left to skip. Free and ad-free.">
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon.png">
     <style>
@@ -17,26 +17,48 @@
             color: #fff;
         }
         
-        .hero {
-            background: linear-gradient(180deg, #FF002F 0%, #000 60%);
-            padding: 80px 20px 60px;
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 24px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            text-align: center;
+            z-index: 100;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .nav-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+        
+        .nav-logo span {
+            font-weight: 600;
+            font-size: 17px;
         }
         
         .lang-switch {
-            position: absolute;
-            top: 20px;
-            right: 20px;
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
         
         .lang-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
             color: rgba(255,255,255,0.6);
             padding: 6px 12px;
             border-radius: 20px;
@@ -45,236 +67,380 @@
             transition: all 0.2s;
         }
         
-        .lang-btn:hover { background: rgba(255,255,255,0.2); }
+        .lang-btn:hover { background: rgba(255,255,255,0.15); }
         
         .lang-btn.active {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
             color: #fff;
-            border-color: rgba(255,255,255,0.4);
+            border-color: rgba(255,255,255,0.25);
         }
         
-        .logo {
-            width: 100px;
-            height: 100px;
-            border-radius: 22px;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+        }
+        
+        /* Bento Grid */
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px;
+        }
+        
+        .card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.12);
+        }
+        
+        /* Hero Card */
+        .card-hero {
+            grid-column: span 6;
+            background: linear-gradient(135deg, rgba(255,0,47,0.15) 0%, rgba(0,0,0,0) 60%);
+            text-align: center;
+            padding: 60px 40px;
+        }
+        
+        .card-hero .logo {
+            width: 88px;
+            height: 88px;
+            border-radius: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 20px 60px rgba(255, 0, 47, 0.5);
+            box-shadow: 0 20px 50px rgba(255,0,47,0.4);
         }
         
-        h1 {
-            font-size: 42px;
+        .card-hero h1 {
+            font-size: 44px;
             font-weight: 700;
             letter-spacing: -1px;
             margin-bottom: 8px;
         }
         
-        .slogan {
-            font-size: 18px;
-            opacity: 0.7;
-            margin-bottom: 28px;
+        .card-hero .tagline {
+            font-size: 19px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 24px;
         }
         
-        .promo {
-            max-width: 420px;
+        .card-hero .desc {
             font-size: 17px;
+            color: rgba(255,255,255,0.8);
+            max-width: 460px;
+            margin: 0 auto 28px;
             line-height: 1.6;
-            opacity: 0.9;
-            margin-bottom: 8px;
-        }
-        
-        .promo-sub {
-            font-size: 15px;
-            opacity: 0.7;
-            margin-bottom: 32px;
         }
         
         .badge img {
-            height: 50px;
+            height: 48px;
+            transition: opacity 0.2s;
         }
         
-        .content {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 50px 24px;
+        .badge img:hover {
+            opacity: 0.85;
         }
         
-        .section {
-            margin-bottom: 48px;
+        /* Feature Cards */
+        .card-feature {
+            grid-column: span 3;
         }
         
-        .section h2 {
-            font-size: 13px;
+        .card-small {
+            grid-column: span 2;
+        }
+        
+        .card-label {
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             color: #FF002F;
-            margin-bottom: 16px;
-        }
-        
-        .section p {
-            font-size: 16px;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 16px;
-        }
-        
-        .section p:last-child {
-            margin-bottom: 0;
-        }
-        
-        .highlight {
-            color: #fff;
+            margin-bottom: 12px;
             font-weight: 500;
         }
         
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+        .card h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
         }
         
-        @media (max-width: 500px) {
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
+        .card p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
         }
         
-        .feature {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 16px;
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
         }
         
-        .feature-icon {
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-        
-        .feature-text {
-            font-size: 14px;
-            color: rgba(255,255,255,0.8);
-            line-height: 1.4;
-        }
-        
-        .footer-info {
+        /* Swipe Demo */
+        .swipe-demo {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
             align-items: center;
-            gap: 8px 16px;
-            padding: 16px 20px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 12px;
-            margin-bottom: 48px;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 20px;
+        }
+        
+        .swipe-action {
             text-align: center;
         }
         
-        .footer-info span {
+        .swipe-arrow {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+        
+        .swipe-label {
             font-size: 13px;
-            color: rgba(255,255,255,0.6);
-            white-space: nowrap;
+            color: rgba(255,255,255,0.5);
         }
         
-        .footer-info .dot {
-            color: rgba(255,255,255,0.3);
+        .swipe-left .swipe-arrow { color: rgba(255,255,255,0.4); }
+        .swipe-right .swipe-arrow { color: #FF002F; }
+        
+        /* Mode Cards */
+        .mode-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 16px;
         }
         
-        .links {
+        .mode-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 12px;
+        }
+        
+        .mode-icon {
+            font-size: 20px;
+        }
+        
+        .mode-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* Trust Card */
+        .card-trust {
+            grid-column: span 6;
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 20px;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .trust-badge .check {
+            color: #34C759;
+        }
+        
+        /* Footer */
+        .footer {
+            grid-column: span 6;
             display: flex;
             justify-content: center;
             gap: 32px;
-            padding-bottom: 40px;
+            padding: 24px 0 0;
         }
         
-        .links a {
+        .footer a {
             color: rgba(255,255,255,0.5);
             text-decoration: none;
             font-size: 14px;
             transition: color 0.2s;
         }
         
-        .links a:hover {
+        .footer a:hover {
             color: #fff;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .bento {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .card-hero,
+            .card-feature,
+            .card-trust,
+            .footer {
+                grid-column: span 2;
+            }
+            
+            .card-small {
+                grid-column: span 1;
+            }
+            
+            .card-hero {
+                padding: 48px 24px;
+            }
+            
+            .card-hero h1 {
+                font-size: 36px;
+            }
+            
+            .card-hero .tagline {
+                font-size: 17px;
+            }
+            
+            .trust-badges {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .card-small {
+                grid-column: span 2;
+            }
+            
+            .swipe-demo {
+                gap: 24px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="hero">
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="icon.png" alt="Ripple">
+            <span>Ripple</span>
+        </a>
         <div class="lang-switch">
             <button class="lang-btn" onclick="setLang('fr')">FR</button>
             <button class="lang-btn active" onclick="setLang('en')">EN</button>
         </div>
-        
-        <img src="icon.png" alt="Ripple" class="logo">
-        <h1>Ripple</h1>
-        <p class="slogan" data-fr="Décide ta musique d'un swipe" data-en="Decide your music with a swipe">Decide your music with a swipe</p>
-        
-        <p class="promo" data-fr="Découvre de nouvelles musiques faites pour toi, puis swipe pour organiser ta bibliothèque." data-en="Discover new music made for you, then swipe to organize your library.">Discover new music made for you, then swipe to organize your library.</p>
-        <p class="promo-sub" data-fr="Trie tes playlists et ajoute des favoris. Gratuit et sans pub." data-en="Save favorites, sort playlists, and build new ones. Free and ad-free.">Save favorites, sort playlists, and build new ones. Free and ad-free.</p>
-        
-        <div class="badge">
-            <a href="https://apps.apple.com/app/ripple" target="_blank">
-                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store">
-            </a>
-        </div>
-    </div>
+    </nav>
     
-    <div class="content">
-        <div class="section">
-            <h2 data-fr="Comment ça marche" data-en="How it works">How it works</h2>
-            <p data-fr="Découvre des recommandations Apple Music personnalisées ou explore ta bibliothèque. Lance le swipe et fais confiance à ton instinct. <span class='highlight'>Un morceau arrive, tu écoutes, tu swipes.</span>" data-en="Discover personalized Apple Music recommendations or explore your own library. Start swiping and act on instinct. <span class='highlight'>A track plays, you listen, you swipe.</span>">Discover personalized Apple Music recommendations or explore your own library. Start swiping and act on instinct. <span class="highlight">A track plays, you listen, you swipe.</span></p>
-            <p data-fr="Utilise Ripple pour trier tes playlists, gérer tes favoris ou créer de nouvelles playlists à la volée. Choisis entre le mode <span class='highlight'>Favoris</span> et le mode <span class='highlight'>Ajout à une playlist</span> avant de commencer." data-en="Use Ripple to sort your playlists, save favorites, or build new playlists on the fly. Choose between <span class='highlight'>Favorites</span> mode and <span class='highlight'>Add to Playlist</span> mode before you start.">Use Ripple to sort your playlists, save favorites, or build new playlists on the fly. Choose between <span class="highlight">Favorites</span> mode and <span class="highlight">Add to Playlist</span> mode before you start.</p>
-        </div>
-        
-        <div class="section">
-            <h2 data-fr="Fonctionnalités" data-en="Features">Features</h2>
-            <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-icon">🎵</div>
-                    <div class="feature-text" data-fr="Recommandations personnalisées" data-en="Personalized recommendations">Personalized recommendations</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">⭐</div>
-                    <div class="feature-text" data-fr="Mode Favoris" data-en="Favorites mode">Favorites mode</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📝</div>
-                    <div class="feature-text" data-fr="Mode Ajout à une playlist" data-en="Add to Playlist mode">Add to Playlist mode</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🎧</div>
-                    <div class="feature-text" data-fr="Aperçu audio avant de décider" data-en="Audio preview before deciding">Audio preview before deciding</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📊</div>
-                    <div class="feature-text" data-fr="Tri par titre, artiste, album" data-en="Sort by title, artist, album">Sort by title, artist, album</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🌙</div>
-                    <div class="feature-text" data-fr="Mode sombre et clair" data-en="Dark and light mode">Dark and light mode</div>
+    <div class="container">
+        <div class="bento">
+            <!-- Hero -->
+            <div class="card card-hero">
+                <img src="icon.png" alt="Ripple" class="logo">
+                <h1>Ripple</h1>
+                <p class="tagline" data-fr="Le choix musical d'un swipe" data-en="Music choice with a swipe">Music choice with a swipe</p>
+                <p class="desc" data-fr="Explorez votre musique et décidez plus vite. Swipe à droite pour ajouter. Swipe à gauche pour passer. Gratuit et sans pub." data-en="Explore your music and decide faster. Swipe right to add. Swipe left to skip. Free and ad-free.">Explore your music and decide faster. Swipe right to add. Swipe left to skip. Free and ad-free.</p>
+                <div class="badge">
+                    <a href="https://apps.apple.com/app/ripple" target="_blank">
+                        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store">
+                    </a>
                 </div>
             </div>
-        </div>
-        
-        <div class="section">
-            <h2 data-fr="Philosophie" data-en="Philosophy">Philosophy</h2>
-            <p data-fr="Écoute un extrait avant chaque décision et garde le contrôle de ta musique dans une interface épurée, fluide et inspirée d'Apple Music." data-en="Listen to a preview before every decision and keep full control of your music in a clean, fluid interface inspired by Apple Music.">Listen to a preview before every decision and keep full control of your music in a clean, fluid interface inspired by Apple Music.</p>
-            <p data-fr="<span class='highlight'>Ripple ne supprime aucun morceau.</span> Elle t'aide simplement à décider plus vite." data-en="<span class='highlight'>Ripple never deletes your music.</span> It simply helps you decide faster."><span class="highlight">Ripple never deletes your music.</span> It simply helps you decide faster.</p>
-        </div>
-        
-        <div class="footer-info">
-            <span data-fr="✓ Gratuit" data-en="✓ Free">✓ Free</span>
-            <span class="dot">·</span>
-            <span data-fr="✓ Sans publicité" data-en="✓ Ad-free">✓ Ad-free</span>
-            <span class="dot">·</span>
-            <span data-fr="✓ Mode sombre" data-en="✓ Dark mode">✓ Dark mode</span>
-            <span class="dot">·</span>
-            <span data-fr="Requiert Apple Music" data-en="Requires Apple Music">Requires Apple Music</span>
-        </div>
-        
-        <div class="links">
-            <a href="privacy.html" data-fr="Confidentialité" data-en="Privacy">Privacy</a>
-            <a href="support.html" data-fr="Support" data-en="Support">Support</a>
+            
+            <!-- How it works -->
+            <div class="card card-feature">
+                <div class="card-label" data-fr="Comment ça marche" data-en="How it works">How it works</div>
+                <h2 data-fr="Écoutez. Décidez. Avancez." data-en="Listen. Decide. Move on.">Listen. Decide. Move on.</h2>
+                <p data-fr="Un morceau arrive. Vous l'écoutez. Vous swipez. Droite pour garder, gauche pour passer. Simple et fluide." data-en="A track plays. You listen. You swipe. Right to keep, left to skip. Simple and smooth.">A track plays. You listen. You swipe. Right to keep, left to skip. Simple and smooth.</p>
+                <div class="swipe-demo">
+                    <div class="swipe-action swipe-left">
+                        <div class="swipe-arrow">←</div>
+                        <div class="swipe-label" data-fr="Passer" data-en="Skip">Skip</div>
+                    </div>
+                    <div class="swipe-action swipe-right">
+                        <div class="swipe-arrow">→</div>
+                        <div class="swipe-label" data-fr="Ajouter" data-en="Add">Add</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modes -->
+            <div class="card card-feature">
+                <div class="card-label" data-fr="Deux modes" data-en="Two modes">Two modes</div>
+                <h2 data-fr="Choisissez votre mode" data-en="Choose your mode">Choose your mode</h2>
+                <p data-fr="Avant de commencer, décidez comment vous voulez utiliser le swipe." data-en="Before you start, decide how you want to use the swipe.">Before you start, decide how you want to use the swipe.</p>
+                <div class="mode-list">
+                    <div class="mode-item">
+                        <span class="mode-icon">⭐</span>
+                        <span class="mode-text" data-fr="Favoris — Ajouter aux favoris" data-en="Favorites — Add to favorites">Favorites — Add to favorites</span>
+                    </div>
+                    <div class="mode-item">
+                        <span class="mode-icon">📝</span>
+                        <span class="mode-text" data-fr="Playlist — Ajouter à une playlist" data-en="Playlist — Add to a playlist">Playlist — Add to a playlist</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Explore -->
+            <div class="card card-small">
+                <div class="card-icon">🎵</div>
+                <h2 data-fr="Pour vous" data-en="For You">For You</h2>
+                <p data-fr="Parcourez les recommandations Apple Music." data-en="Browse Apple Music recommendations.">Browse Apple Music recommendations.</p>
+            </div>
+            
+            <!-- Library -->
+            <div class="card card-small">
+                <div class="card-icon">📚</div>
+                <h2 data-fr="Votre bibliothèque" data-en="Your Library">Your Library</h2>
+                <p data-fr="Revisitez vos playlists existantes." data-en="Revisit your existing playlists.">Revisit your existing playlists.</p>
+            </div>
+            
+            <!-- Preview -->
+            <div class="card card-small">
+                <div class="card-icon">🎧</div>
+                <h2 data-fr="Aperçu audio" data-en="Audio preview">Audio preview</h2>
+                <p data-fr="Écoutez avant de décider." data-en="Listen before you decide.">Listen before you decide.</p>
+            </div>
+            
+            <!-- Trust -->
+            <div class="card card-trust">
+                <h2 data-fr="Ripple ne supprime jamais votre musique." data-en="Ripple never deletes your music.">Ripple never deletes your music.</h2>
+                <p data-fr="Vous gardez le contrôle. L'app vous aide simplement à décider plus vite." data-en="You stay in control. The app simply helps you decide faster.">You stay in control. The app simply helps you decide faster.</p>
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <span class="check">✓</span>
+                        <span data-fr="Gratuit" data-en="Free">Free</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span class="check">✓</span>
+                        <span data-fr="Sans publicité" data-en="Ad-free">Ad-free</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span class="check">✓</span>
+                        <span data-fr="Mode sombre" data-en="Dark mode">Dark mode</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span class="check">✓</span>
+                        <span data-fr="Aucune collecte de données" data-en="No data collection">No data collection</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <a href="privacy.html" data-fr="Confidentialité" data-en="Privacy">Privacy</a>
+                <a href="support.html" data-fr="Support" data-en="Support">Support</a>
+            </div>
         </div>
     </div>
 

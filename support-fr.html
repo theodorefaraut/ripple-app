@@ -8,115 +8,247 @@
     <link rel="apple-touch-icon" href="icon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
             background: #000;
             color: #fff;
             line-height: 1.7;
-            padding: 40px 20px;
         }
-        .container { max-width: 640px; margin: 0 auto; }
-        .back {
-            display: inline-flex;
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 6px;
+            z-index: 100;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .nav-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+        
+        .nav-logo span {
+            font-weight: 600;
+            font-size: 17px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        
+        .header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 17px;
+        }
+        
+        .contact-card {
+            background: linear-gradient(135deg, rgba(255,0,47,0.1) 0%, rgba(0,0,0,0) 60%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .contact-card h2 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .contact-card a {
             color: #FF002F;
             text-decoration: none;
-            font-size: 14px;
-            margin-bottom: 32px;
+            font-size: 17px;
         }
-        .back:hover { text-decoration: underline; }
-        h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
-        .intro { color: rgba(255,255,255,0.7); font-size: 15px; margin-bottom: 32px; }
-        h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: #FF002F; margin-top: 32px; margin-bottom: 16px; }
-        .contact-box {
-            background: rgba(255,255,255,0.05);
+        
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #FF002F;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .card {
+            background: rgba(255,255,255,0.04);
             border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 8px;
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.2s;
         }
-        .contact-box p { margin: 0; font-size: 15px; }
-        .contact-box a { color: #FF002F; text-decoration: none; }
-        .contact-box a:hover { text-decoration: underline; }
-        .faq-item {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 12px;
-            padding: 18px 20px;
+        
+        .card:hover {
+            background: rgba(255,255,255,0.06);
+        }
+        
+        .card-full {
+            grid-column: span 2;
+        }
+        
+        .card h3 {
+            font-size: 16px;
+            font-weight: 600;
             margin-bottom: 10px;
+            color: #fff;
         }
-        .faq-item h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: #fff; }
-        .faq-item p { font-size: 14px; margin: 0; color: rgba(255,255,255,0.7); line-height: 1.6; }
+        
+        .card p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+        }
+        
+        .card strong {
+            color: #fff;
+        }
+        
+        @media (max-width: 700px) {
+            .bento {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-full {
+                grid-column: span 1;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 <body>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="icon.png" alt="Ripple">
+            <span>Ripple</span>
+        </a>
+    </nav>
+
     <div class="container">
-        <a href="index.html" class="back">← Retour</a>
-        
-        <h1>Support</h1>
-        <p class="intro">Besoin d'aide avec Ripple ? Nous sommes là pour vous.</p>
-        
-        <h2>Contact</h2>
-        <div class="contact-box">
-            <p>📧 <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
+        <div class="header">
+            <h1>Support</h1>
+            <p>Besoin d'aide avec Ripple ?</p>
         </div>
         
-        <h2>Questions fréquentes</h2>
-        
-        <div class="faq-item">
-            <h3>Pourquoi dois-je autoriser l'accès à Apple Music ?</h3>
-            <p>Ripple a besoin d'accéder à votre bibliothèque pour afficher vos playlists, les recommandations et vous permettre d'ajouter des morceaux à vos favoris ou playlists.</p>
+        <div class="contact-card">
+            <h2>Contactez-nous</h2>
+            <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a>
         </div>
         
-        <div class="faq-item">
-            <h3>Quelle est la différence entre les deux modes ?</h3>
-            <p><strong>Mode Favoris :</strong> swipe à droite ajoute le morceau à vos favoris Apple Music.<br><strong>Mode Ajout à une playlist :</strong> swipe à droite ajoute le morceau à une playlist de votre choix.</p>
+        <div class="section">
+            <div class="section-label">Démarrage</div>
+            <div class="bento">
+                <div class="card">
+                    <h3>Pourquoi autoriser Apple Music ?</h3>
+                    <p>Ripple a besoin d'accéder à votre bibliothèque pour afficher vos playlists et vous permettre d'ajouter des titres.</p>
+                </div>
+                <div class="card">
+                    <h3>Abonnement requis ?</h3>
+                    <p>Oui, un abonnement Apple Music actif est nécessaire pour utiliser Ripple.</p>
+                </div>
+            </div>
         </div>
         
-        <div class="faq-item">
-            <h3>Comment changer le mode de swipe ?</h3>
-            <p>Appuyez sur l'icône main (🖐️) en haut de l'écran. Vous pouvez choisir entre le mode Favoris ou Ajout à une playlist, et sélectionner la playlist cible.</p>
+        <div class="section">
+            <div class="section-label">Modes</div>
+            <div class="bento">
+                <div class="card">
+                    <h3>Les deux modes</h3>
+                    <p><strong>Favoris :</strong> swipe à droite ajoute aux favoris.<br><strong>Playlist :</strong> swipe à droite ajoute à une playlist de votre choix.</p>
+                </div>
+                <div class="card">
+                    <h3>Changer de mode</h3>
+                    <p>Appuyez sur l'icône main en haut de l'écran. Choisissez Favoris ou Playlist, puis sélectionnez la playlist cible.</p>
+                </div>
+            </div>
         </div>
         
-        <div class="faq-item">
-            <h3>Comment ajouter un morceau à une playlist spécifique ?</h3>
-            <p>Depuis la liste des morceaux, appuyez sur l'icône + à côté du cœur. Vous pourrez choisir une playlist existante ou en créer une nouvelle.</p>
+        <div class="section">
+            <div class="section-label">Questions courantes</div>
+            <div class="bento">
+                <div class="card">
+                    <h3>C'est quoi « Pour vous » ?</h3>
+                    <p>Des playlists recommandées par Apple Music selon vos goûts. Idéal pour découvrir de nouveaux titres.</p>
+                </div>
+                <div class="card">
+                    <h3>Titres grisés ?</h3>
+                    <p>Ce sont les titres déjà traités. Ils restent visibles et interactifs.</p>
+                </div>
+                <div class="card">
+                    <h3>Nouvelle playlist invisible ?</h3>
+                    <p>Les playlists créées récemment peuvent mettre quelques minutes à apparaître. Tirez vers le bas pour actualiser.</p>
+                </div>
+                <div class="card">
+                    <h3>Ajouter à une playlist spécifique ?</h3>
+                    <p>Depuis la liste des titres, appuyez sur + à côté du cœur. Choisissez une playlist ou créez-en une nouvelle.</p>
+                </div>
+            </div>
         </div>
         
-        <div class="faq-item">
-            <h3>C'est quoi la section « Pour vous » ?</h3>
-            <p>Cette section affiche des playlists recommandées par Apple Music en fonction de vos goûts musicaux. Parfait pour découvrir de nouveaux morceaux !</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3>Pourquoi certains morceaux sont grisés ?</h3>
-            <p>Les morceaux grisés sont ceux que vous avez déjà traités (swipés). Ils restent visibles pour référence et vous pouvez toujours interagir avec.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3>Mes playlists créées n'apparaissent pas</h3>
-            <p>Les playlists créées récemment peuvent mettre quelques minutes avant d'apparaître (limitation Apple Music). Tirez vers le bas pour actualiser.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3>Est-ce que Ripple supprime mes morceaux ?</h3>
-            <p>Non, jamais. Ripple ne supprime aucun morceau de votre bibliothèque. Elle vous aide simplement à organiser votre musique plus rapidement.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3>L'application nécessite-t-elle un abonnement Apple Music ?</h3>
-            <p>Oui, un abonnement Apple Music actif est requis pour utiliser Ripple.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3>Comment supprimer mes données ?</h3>
-            <p>Toutes les données sont stockées localement sur votre appareil. Supprimez simplement l'application pour effacer toutes les données.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3>L'application est-elle gratuite ?</h3>
-            <p>Oui, Ripple est entièrement gratuite et sans publicité.</p>
+        <div class="section">
+            <div class="section-label">Sécurité</div>
+            <div class="bento">
+                <div class="card">
+                    <h3>Ripple supprime mes titres ?</h3>
+                    <p>Non, jamais. Ripple ne supprime aucun titre. Elle vous aide à décider plus vite.</p>
+                </div>
+                <div class="card">
+                    <h3>Supprimer mes données ?</h3>
+                    <p>Toutes les données sont locales. Supprimez l'app pour tout effacer.</p>
+                </div>
+                <div class="card card-full">
+                    <h3>L'app est gratuite ?</h3>
+                    <p>Oui. Ripple est gratuite et sans publicité.</p>
+                </div>
+            </div>
         </div>
     </div>
 </body>
