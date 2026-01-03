@@ -9,28 +9,25 @@
     <link rel="apple-touch-icon" href="icon.png">
     <style>
         :root {
-            --bg: #f5f5f7;
-            --surface: #fff;
-            --surface-border: rgba(0,0,0,0.08);
+            --bg: #fff;
+            --surface: rgba(255,255,255,0.7);
+            --surface-border: rgba(0,0,0,0.06);
             --text-primary: #1d1d1f;
             --text-secondary: rgba(0,0,0,0.55);
             --text-tertiary: rgba(0,0,0,0.4);
             --accent: #FF002F;
             --accent-soft: rgba(255,0,47,0.08);
-            --success: #34C759;
-            --icon-color: #1d1d1f;
         }
         
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg: #000;
-                --surface: #1c1c1e;
+                --surface: rgba(255,255,255,0.06);
                 --surface-border: rgba(255,255,255,0.1);
                 --text-primary: #f5f5f7;
                 --text-secondary: rgba(255,255,255,0.6);
                 --text-tertiary: rgba(255,255,255,0.4);
                 --accent-soft: rgba(255,0,47,0.15);
-                --icon-color: #f5f5f7;
             }
         }
         
@@ -140,6 +137,8 @@
             border: 1px solid var(--surface-border);
             border-radius: 24px;
             padding: 32px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
         
         /* Hero */
@@ -235,8 +234,15 @@
             gap: 48px;
             margin-top: 32px;
             padding: 32px;
-            background: var(--bg);
+            background: rgba(255,255,255,0.5);
             border-radius: 16px;
+            border: 1px solid var(--surface-border);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            .swipe-demo {
+                background: rgba(255,255,255,0.04);
+            }
         }
         
         .swipe-action {
@@ -421,8 +427,8 @@
             width: 28px;
             height: 28px;
             border-radius: 50%;
-            background: rgba(52,199,89,0.12);
-            color: var(--success);
+            background: var(--accent-soft);
+            color: var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;

@@ -8,9 +8,9 @@
     <link rel="apple-touch-icon" href="icon.png">
     <style>
         :root {
-            --bg: #f5f5f7;
-            --surface: #fff;
-            --surface-border: rgba(0,0,0,0.08);
+            --bg: #fff;
+            --surface: rgba(255,255,255,0.7);
+            --surface-border: rgba(0,0,0,0.06);
             --text-primary: #1d1d1f;
             --text-secondary: rgba(0,0,0,0.55);
             --text-tertiary: rgba(0,0,0,0.4);
@@ -21,7 +21,7 @@
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg: #000;
-                --surface: #1c1c1e;
+                --surface: rgba(255,255,255,0.06);
                 --surface-border: rgba(255,255,255,0.1);
                 --text-primary: #f5f5f7;
                 --text-secondary: rgba(255,255,255,0.6);
@@ -146,6 +146,8 @@
             padding: 32px;
             text-align: center;
             margin-bottom: 48px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
         
         .contact h2 {
@@ -189,6 +191,8 @@
             border: 1px solid var(--surface-border);
             border-radius: 16px;
             padding: 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
         
         .card-full {
