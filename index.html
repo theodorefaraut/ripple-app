@@ -18,6 +18,7 @@
             --accent: #FF002F;
             --accent-soft: rgba(255,0,47,0.08);
             --success: #34C759;
+            --icon-color: #1d1d1f;
         }
         
         @media (prefers-color-scheme: dark) {
@@ -29,6 +30,7 @@
                 --text-secondary: rgba(255,255,255,0.6);
                 --text-tertiary: rgba(255,255,255,0.4);
                 --accent-soft: rgba(255,0,47,0.15);
+                --icon-color: #f5f5f7;
             }
         }
         
@@ -40,6 +42,22 @@
             min-height: 100vh;
             color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Icons */
+        .icon-svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        .icon-svg.large {
+            width: 32px;
+            height: 32px;
         }
         
         /* Navigation */
@@ -235,23 +253,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            transition: transform 0.2s;
         }
         
         .swipe-left .swipe-circle {
             background: var(--surface);
             border: 2px solid var(--surface-border);
+            color: var(--text-tertiary);
         }
         
         .swipe-right .swipe-circle {
             background: var(--accent);
             color: white;
             box-shadow: 0 8px 24px rgba(255,0,47,0.3);
-        }
-        
-        .swipe-action:hover .swipe-circle {
-            transform: scale(1.08);
         }
         
         .swipe-text {
@@ -289,8 +302,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
             margin-bottom: 20px;
+            color: var(--accent);
         }
         
         .card-preview h3 {
@@ -325,7 +338,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            color: var(--accent);
         }
         
         .mode-header h3 {
@@ -347,8 +360,15 @@
         }
         
         .feature-icon {
-            font-size: 36px;
-            margin-bottom: 16px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: var(--accent);
         }
         
         .card-feature h3 {
@@ -406,7 +426,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+        }
+        
+        .trust-badge .icon svg {
+            width: 14px;
+            height: 14px;
+            stroke-width: 2.5;
         }
         
         /* Footer */
@@ -489,7 +514,7 @@
                 <img src="icon.png" alt="Ripple" class="logo">
                 <h1>Ripple</h1>
                 <p class="tagline" data-fr="Le choix musical d'un swipe" data-en="Music choice with a swipe">Music choice with a swipe</p>
-                <p class="desc" data-fr="Explorez votre musique et décidez plus vite. Swipez à droite pour ajouter, à gauche pour passer." data-en="Explore your music and decide faster. Swipe right to add, left to skip.">Explore your music and decide faster. Swipe right to add, left to skip.</p>
+                <p class="desc" data-fr="Ripple vous aide à explorer votre musique et décider plus vite." data-en="Ripple helps you explore your music and decide faster.">Ripple helps you explore your music and decide faster.</p>
                 <div class="badge">
                     <a href="https://apps.apple.com/app/ripple" target="_blank">
                         <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on App Store">
@@ -501,18 +526,22 @@
             <div class="card card-swipe">
                 <div class="card-label" data-fr="Comment ça marche" data-en="How it works">How it works</div>
                 <h2 data-fr="Écoutez. Décidez. Avancez." data-en="Listen. Decide. Move on.">Listen. Decide. Move on.</h2>
-                <p data-fr="Un morceau arrive. Vous l'écoutez. Vous swipez. Droite pour garder, gauche pour passer. Simple et fluide." data-en="A track plays. You listen. You swipe. Right to keep, left to skip. Simple and smooth.">A track plays. You listen. You swipe. Right to keep, left to skip. Simple and smooth.</p>
+                <p data-fr="Droite pour garder. Gauche pour passer. Simple et fluide." data-en="Right to keep. Left to skip. Simple and smooth.">Right to keep. Left to skip. Simple and smooth.</p>
                 
                 <div class="swipe-demo">
                     <div class="swipe-action swipe-left">
-                        <div class="swipe-circle">←</div>
+                        <div class="swipe-circle">
+                            <svg class="icon-svg large" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                        </div>
                         <div class="swipe-text">
                             <div class="swipe-title" data-fr="Passer" data-en="Skip">Skip</div>
                             <div class="swipe-desc" data-fr="Titre suivant" data-en="Next track">Next track</div>
                         </div>
                     </div>
                     <div class="swipe-action swipe-right">
-                        <div class="swipe-circle">→</div>
+                        <div class="swipe-circle">
+                            <svg class="icon-svg large" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </div>
                         <div class="swipe-text">
                             <div class="swipe-title" data-fr="Ajouter" data-en="Add">Add</div>
                             <div class="swipe-desc" data-fr="Favoris ou playlist" data-en="Favorites or playlist">Favorites or playlist</div>
@@ -523,7 +552,9 @@
             
             <!-- Preview -->
             <div class="card card-preview">
-                <div class="preview-icon">🎧</div>
+                <div class="preview-icon">
+                    <svg class="icon-svg large" viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                </div>
                 <h3 data-fr="Aperçu audio" data-en="Audio preview">Audio preview</h3>
                 <p data-fr="Écoutez chaque titre avant de décider." data-en="Listen to each track before deciding.">Listen to each track before deciding.</p>
             </div>
@@ -531,35 +562,47 @@
             <!-- Mode Cards -->
             <div class="card card-mode">
                 <div class="mode-header">
-                    <div class="mode-icon">⭐</div>
+                    <div class="mode-icon">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="currentColor" stroke="none"/></svg>
+                    </div>
                     <h3 data-fr="Mode Favoris" data-en="Favorites mode">Favorites mode</h3>
                 </div>
-                <p data-fr="Swipe à droite pour ajouter un titre à vos favoris Apple Music." data-en="Swipe right to add a track to your Apple Music favorites.">Swipe right to add a track to your Apple Music favorites.</p>
+                <p data-fr="→ Ajouter aux favoris" data-en="→ Add to favorites">→ Add to favorites</p>
+                <p data-fr="← Passer / Retirer" data-en="← Skip / Remove">← Skip / Remove</p>
             </div>
             
             <div class="card card-mode">
                 <div class="mode-header">
-                    <div class="mode-icon">📝</div>
+                    <div class="mode-icon">
+                        <svg class="icon-svg" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                    </div>
                     <h3 data-fr="Mode Playlist" data-en="Playlist mode">Playlist mode</h3>
                 </div>
-                <p data-fr="Swipe à droite pour ajouter un titre à une playlist de votre choix." data-en="Swipe right to add a track to a playlist of your choice.">Swipe right to add a track to a playlist of your choice.</p>
+                <p data-fr="→ Ajouter à votre playlist" data-en="→ Add to your playlist">→ Add to your playlist</p>
+                <p data-fr="← Passer" data-en="← Skip">← Skip</p>
             </div>
             
             <!-- Features -->
             <div class="card card-feature">
-                <div class="feature-icon">🎵</div>
+                <div class="feature-icon">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
                 <h3 data-fr="Pour vous" data-en="For You">For You</h3>
                 <p data-fr="Recommandations Apple Music" data-en="Apple Music recommendations">Apple Music recommendations</p>
             </div>
             
             <div class="card card-feature">
-                <div class="feature-icon">📚</div>
+                <div class="feature-icon">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                </div>
                 <h3 data-fr="Votre bibliothèque" data-en="Your Library">Your Library</h3>
                 <p data-fr="Vos playlists existantes" data-en="Your existing playlists">Your existing playlists</p>
             </div>
             
             <div class="card card-feature">
-                <div class="feature-icon">🌙</div>
+                <div class="feature-icon">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </div>
                 <h3 data-fr="Mode sombre" data-en="Dark mode">Dark mode</h3>
                 <p data-fr="Interface adaptative" data-en="Adaptive interface">Adaptive interface</p>
             </div>
@@ -571,19 +614,19 @@
                 
                 <div class="trust-badges">
                     <div class="trust-badge">
-                        <span class="icon">✓</span>
+                        <span class="icon"><svg class="icon-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
                         <span data-fr="Gratuit" data-en="Free">Free</span>
                     </div>
                     <div class="trust-badge">
-                        <span class="icon">✓</span>
+                        <span class="icon"><svg class="icon-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
                         <span data-fr="Sans publicité" data-en="Ad-free">Ad-free</span>
                     </div>
                     <div class="trust-badge">
-                        <span class="icon">✓</span>
+                        <span class="icon"><svg class="icon-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
                         <span data-fr="Aucune collecte de données" data-en="No data collection">No data collection</span>
                     </div>
                     <div class="trust-badge">
-                        <span class="icon">✓</span>
+                        <span class="icon"><svg class="icon-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
                         <span data-fr="Requiert Apple Music" data-en="Requires Apple Music">Requires Apple Music</span>
                     </div>
                 </div>
