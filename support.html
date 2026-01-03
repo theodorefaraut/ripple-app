@@ -7,13 +7,38 @@
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon.png">
     <style>
+        :root {
+            --bg: #f5f5f7;
+            --surface: #fff;
+            --surface-border: rgba(0,0,0,0.08);
+            --text-primary: #1d1d1f;
+            --text-secondary: rgba(0,0,0,0.55);
+            --text-tertiary: rgba(0,0,0,0.4);
+            --accent: #FF002F;
+            --accent-soft: rgba(255,0,47,0.06);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #000;
+                --surface: #1c1c1e;
+                --surface-border: rgba(255,255,255,0.1);
+                --text-primary: #f5f5f7;
+                --text-secondary: rgba(255,255,255,0.6);
+                --text-tertiary: rgba(255,255,255,0.4);
+                --accent-soft: rgba(255,0,47,0.12);
+            }
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-            background: #000;
-            color: #fff;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text-primary);
             line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
         
         .nav {
@@ -21,14 +46,13 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 16px 24px;
+            padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: var(--bg);
+            border-bottom: 1px solid var(--surface-border);
         }
         
         .nav-logo {
@@ -36,7 +60,7 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            color: #fff;
+            color: var(--text-primary);
         }
         
         .nav-logo img {
@@ -50,28 +74,46 @@
             font-size: 17px;
         }
         
+        .nav-home {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+        
+        .nav-home:hover {
+            color: var(--text-primary);
+            background: var(--surface);
+        }
+        
         .lang-switch {
             display: flex;
-            gap: 6px;
+            gap: 4px;
         }
         
         .lang-btn {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: rgba(255,255,255,0.6);
-            padding: 6px 12px;
-            border-radius: 20px;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-tertiary);
+            padding: 6px 10px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 13px;
+            font-weight: 500;
             transition: all 0.2s;
         }
         
-        .lang-btn:hover { background: rgba(255,255,255,0.15); }
+        .lang-btn:hover { color: var(--text-secondary); }
         
         .lang-btn.active {
-            background: rgba(255,255,255,0.15);
-            color: #fff;
-            border-color: rgba(255,255,255,0.25);
+            background: var(--surface);
+            color: var(--text-primary);
+            border-color: var(--surface-border);
         }
         
         .container {
@@ -86,39 +128,41 @@
         }
         
         .header h1 {
-            font-size: 36px;
+            font-size: 40px;
             font-weight: 700;
             margin-bottom: 12px;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
         }
         
         .header p {
-            color: rgba(255,255,255,0.6);
+            color: var(--text-secondary);
             font-size: 17px;
         }
         
         /* Contact Card */
-        .contact-card {
-            background: linear-gradient(135deg, rgba(255,0,47,0.1) 0%, rgba(0,0,0,0) 60%);
-            border: 1px solid rgba(255,255,255,0.08);
+        .contact {
+            background: var(--accent-soft);
+            border: 1px solid transparent;
             border-radius: 20px;
             padding: 32px;
             text-align: center;
             margin-bottom: 48px;
         }
         
-        .contact-card h2 {
-            font-size: 20px;
-            margin-bottom: 12px;
+        .contact h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
         
-        .contact-card a {
-            color: #FF002F;
+        .contact a {
+            color: var(--accent);
             text-decoration: none;
             font-size: 17px;
+            font-weight: 500;
         }
         
-        .contact-card a:hover {
+        .contact a:hover {
             text-decoration: underline;
         }
         
@@ -128,31 +172,26 @@
         }
         
         .section-label {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
-            color: #FF002F;
-            margin-bottom: 20px;
-            font-weight: 500;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-weight: 600;
         }
         
         /* Bento Grid */
         .bento {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 12px;
         }
         
         .card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 20px;
-            padding: 24px;
-            transition: all 0.2s;
-        }
-        
-        .card:hover {
-            background: rgba(255,255,255,0.06);
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
+            padding: 20px;
         }
         
         .card-full {
@@ -160,34 +199,36 @@
         }
         
         .card h3 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            margin-bottom: 10px;
-            color: #fff;
+            margin-bottom: 6px;
+            color: var(--text-primary);
         }
         
         .card p {
             font-size: 14px;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.6;
+            color: var(--text-secondary);
+            line-height: 1.55;
         }
         
         .card strong {
-            color: #fff;
+            color: var(--text-primary);
+            font-weight: 600;
         }
         
-        @media (max-width: 700px) {
-            .bento {
-                grid-template-columns: 1fr;
-            }
-            
-            .card-full {
-                grid-column: span 1;
-            }
-            
-            .header h1 {
-                font-size: 28px;
-            }
+        @media (max-width: 650px) {
+            .bento { grid-template-columns: 1fr; }
+            .card-full { grid-column: span 1; }
+            .header h1 { font-size: 32px; }
+        }
+        
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .contact, .card {
+            animation: fadeUp 0.4s ease forwards;
         }
     </style>
 </head>
@@ -197,6 +238,7 @@
             <img src="icon.png" alt="Ripple">
             <span>Ripple</span>
         </a>
+        <a href="index.html" class="nav-home" data-fr="← Accueil" data-en="← Home">← Home</a>
         <div class="lang-switch">
             <button class="lang-btn" onclick="setLang('fr')">FR</button>
             <button class="lang-btn active" onclick="setLang('en')">EN</button>
@@ -209,7 +251,7 @@
             <p data-fr="Besoin d'aide avec Ripple ?" data-en="Need help with Ripple?">Need help with Ripple?</p>
         </div>
         
-        <div class="contact-card">
+        <div class="contact">
             <h2 data-fr="Contactez-nous" data-en="Contact us">Contact us</h2>
             <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a>
         </div>
@@ -219,68 +261,72 @@
             <div class="section-label" data-fr="Démarrage" data-en="Getting started">Getting started</div>
             <div class="bento">
                 <div class="card">
-                    <h3 data-fr="Pourquoi autoriser Apple Music ?" data-en="Why authorize Apple Music?">Why authorize Apple Music?</h3>
+                    <h3 data-fr="Autorisation Apple Music" data-en="Apple Music authorization">Apple Music authorization</h3>
                     <p data-fr="Ripple a besoin d'accéder à votre bibliothèque pour afficher vos playlists et vous permettre d'ajouter des titres." data-en="Ripple needs access to your library to display your playlists and let you add tracks.">Ripple needs access to your library to display your playlists and let you add tracks.</p>
                 </div>
                 <div class="card">
-                    <h3 data-fr="Abonnement requis ?" data-en="Subscription required?">Subscription required?</h3>
-                    <p data-fr="Oui, un abonnement Apple Music actif est nécessaire pour utiliser Ripple." data-en="Yes, an active Apple Music subscription is required to use Ripple.">Yes, an active Apple Music subscription is required to use Ripple.</p>
+                    <h3 data-fr="Abonnement requis" data-en="Subscription required">Subscription required</h3>
+                    <p data-fr="Un abonnement Apple Music actif est nécessaire pour utiliser Ripple." data-en="An active Apple Music subscription is required to use Ripple.">An active Apple Music subscription is required to use Ripple.</p>
                 </div>
             </div>
         </div>
         
         <!-- Modes -->
         <div class="section">
-            <div class="section-label" data-fr="Modes" data-en="Modes">Modes</div>
+            <div class="section-label" data-fr="Les modes" data-en="Modes">Modes</div>
             <div class="bento">
                 <div class="card">
-                    <h3 data-fr="Les deux modes" data-en="The two modes">The two modes</h3>
-                    <p data-fr="<strong>Favoris :</strong> swipe à droite ajoute aux favoris.<br><strong>Playlist :</strong> swipe à droite ajoute à une playlist de votre choix." data-en="<strong>Favorites:</strong> swipe right adds to favorites.<br><strong>Playlist:</strong> swipe right adds to a playlist of your choice."><strong>Favorites:</strong> swipe right adds to favorites.<br><strong>Playlist:</strong> swipe right adds to a playlist of your choice.</p>
+                    <h3 data-fr="Mode Favoris" data-en="Favorites mode">Favorites mode</h3>
+                    <p data-fr="Swipe à droite = ajout aux favoris Apple Music." data-en="Swipe right = add to Apple Music favorites.">Swipe right = add to Apple Music favorites.</p>
                 </div>
                 <div class="card">
+                    <h3 data-fr="Mode Playlist" data-en="Playlist mode">Playlist mode</h3>
+                    <p data-fr="Swipe à droite = ajout à une playlist de votre choix." data-en="Swipe right = add to a playlist of your choice.">Swipe right = add to a playlist of your choice.</p>
+                </div>
+                <div class="card card-full">
                     <h3 data-fr="Changer de mode" data-en="Change mode">Change mode</h3>
-                    <p data-fr="Appuyez sur l'icône main en haut de l'écran. Choisissez Favoris ou Playlist, puis sélectionnez la playlist cible." data-en="Tap the hand icon at the top of the screen. Choose Favorites or Playlist, then select the target playlist.">Tap the hand icon at the top of the screen. Choose Favorites or Playlist, then select the target playlist.</p>
+                    <p data-fr="Appuyez sur l'icône main en haut de l'écran. Choisissez le mode et la playlist cible." data-en="Tap the hand icon at the top. Choose the mode and target playlist.">Tap the hand icon at the top. Choose the mode and target playlist.</p>
                 </div>
             </div>
         </div>
         
         <!-- Common Questions -->
         <div class="section">
-            <div class="section-label" data-fr="Questions courantes" data-en="Common questions">Common questions</div>
+            <div class="section-label" data-fr="Questions fréquentes" data-en="Common questions">Common questions</div>
             <div class="bento">
                 <div class="card">
-                    <h3 data-fr="C'est quoi « Pour vous » ?" data-en="What is 'For You'?">What is "For You"?</h3>
-                    <p data-fr="Des playlists recommandées par Apple Music selon vos goûts. Idéal pour découvrir de nouveaux titres." data-en="Playlists recommended by Apple Music based on your taste. Great for discovering new tracks.">Playlists recommended by Apple Music based on your taste. Great for discovering new tracks.</p>
+                    <h3 data-fr="Pour vous" data-en="For You">For You</h3>
+                    <p data-fr="Playlists recommandées par Apple Music selon vos goûts." data-en="Playlists recommended by Apple Music based on your taste.">Playlists recommended by Apple Music based on your taste.</p>
                 </div>
                 <div class="card">
-                    <h3 data-fr="Titres grisés ?" data-en="Grayed out tracks?">Grayed out tracks?</h3>
-                    <p data-fr="Ce sont les titres déjà traités. Ils restent visibles et interactifs." data-en="These are tracks you've already processed. They remain visible and interactive.">These are tracks you've already processed. They remain visible and interactive.</p>
+                    <h3 data-fr="Titres grisés" data-en="Grayed tracks">Grayed tracks</h3>
+                    <p data-fr="Titres déjà traités. Ils restent visibles et interactifs." data-en="Already processed tracks. They remain visible and interactive.">Already processed tracks. They remain visible and interactive.</p>
                 </div>
                 <div class="card">
-                    <h3 data-fr="Nouvelle playlist invisible ?" data-en="New playlist not showing?">New playlist not showing?</h3>
-                    <p data-fr="Les playlists créées récemment peuvent mettre quelques minutes à apparaître. Tirez vers le bas pour actualiser." data-en="Recently created playlists may take a few minutes to appear. Pull down to refresh.">Recently created playlists may take a few minutes to appear. Pull down to refresh.</p>
+                    <h3 data-fr="Playlist invisible" data-en="Playlist not showing">Playlist not showing</h3>
+                    <p data-fr="Les nouvelles playlists peuvent mettre quelques minutes à apparaître. Tirez pour actualiser." data-en="New playlists may take a few minutes to appear. Pull to refresh.">New playlists may take a few minutes to appear. Pull to refresh.</p>
                 </div>
                 <div class="card">
-                    <h3 data-fr="Ajouter à une playlist spécifique ?" data-en="Add to a specific playlist?">Add to a specific playlist?</h3>
-                    <p data-fr="Depuis la liste des titres, appuyez sur + à côté du cœur. Choisissez une playlist ou créez-en une nouvelle." data-en="From the track list, tap + next to the heart. Choose a playlist or create a new one.">From the track list, tap + next to the heart. Choose a playlist or create a new one.</p>
+                    <h3 data-fr="Ajouter à une playlist" data-en="Add to playlist">Add to playlist</h3>
+                    <p data-fr="Depuis la liste, appuyez sur + à côté du cœur pour choisir une playlist." data-en="From the list, tap + next to the heart to choose a playlist.">From the list, tap + next to the heart to choose a playlist.</p>
                 </div>
             </div>
         </div>
         
         <!-- Trust -->
         <div class="section">
-            <div class="section-label" data-fr="Sécurité" data-en="Trust">Trust</div>
+            <div class="section-label" data-fr="Confiance" data-en="Trust">Trust</div>
             <div class="bento">
                 <div class="card">
-                    <h3 data-fr="Ripple supprime mes titres ?" data-en="Does Ripple delete my tracks?">Does Ripple delete my tracks?</h3>
-                    <p data-fr="Non, jamais. Ripple ne supprime aucun titre. Elle vous aide à décider plus vite." data-en="No, never. Ripple never deletes any tracks. It helps you decide faster.">No, never. Ripple never deletes any tracks. It helps you decide faster.</p>
+                    <h3 data-fr="Suppression de titres ?" data-en="Track deletion?">Track deletion?</h3>
+                    <p data-fr="Non. Ripple ne supprime jamais vos titres. Elle vous aide à décider." data-en="No. Ripple never deletes your tracks. It helps you decide.">No. Ripple never deletes your tracks. It helps you decide.</p>
                 </div>
                 <div class="card">
-                    <h3 data-fr="Supprimer mes données ?" data-en="Delete my data?">Delete my data?</h3>
+                    <h3 data-fr="Supprimer mes données" data-en="Delete my data">Delete my data</h3>
                     <p data-fr="Toutes les données sont locales. Supprimez l'app pour tout effacer." data-en="All data is local. Delete the app to erase everything.">All data is local. Delete the app to erase everything.</p>
                 </div>
                 <div class="card card-full">
-                    <h3 data-fr="L'app est gratuite ?" data-en="Is the app free?">Is the app free?</h3>
+                    <h3 data-fr="Gratuit ?" data-en="Free?">Free?</h3>
                     <p data-fr="Oui. Ripple est gratuite et sans publicité." data-en="Yes. Ripple is free and ad-free.">Yes. Ripple is free and ad-free.</p>
                 </div>
             </div>

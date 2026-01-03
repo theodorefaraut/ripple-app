@@ -7,13 +7,41 @@
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon.png">
     <style>
+        :root {
+            --bg: #f5f5f7;
+            --surface: #fff;
+            --surface-border: rgba(0,0,0,0.08);
+            --text-primary: #1d1d1f;
+            --text-secondary: rgba(0,0,0,0.55);
+            --text-tertiary: rgba(0,0,0,0.4);
+            --accent: #FF002F;
+            --accent-soft: rgba(255,0,47,0.06);
+            --success: #34C759;
+            --success-soft: rgba(52,199,89,0.1);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #000;
+                --surface: #1c1c1e;
+                --surface-border: rgba(255,255,255,0.1);
+                --text-primary: #f5f5f7;
+                --text-secondary: rgba(255,255,255,0.6);
+                --text-tertiary: rgba(255,255,255,0.4);
+                --accent-soft: rgba(255,0,47,0.12);
+                --success-soft: rgba(52,199,89,0.18);
+            }
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-            background: #000;
-            color: #fff;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text-primary);
             line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
         
         .nav {
@@ -21,14 +49,13 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 16px 24px;
+            padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: var(--bg);
+            border-bottom: 1px solid var(--surface-border);
         }
         
         .nav-logo {
@@ -36,7 +63,7 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            color: #fff;
+            color: var(--text-primary);
         }
         
         .nav-logo img {
@@ -50,53 +77,94 @@
             font-size: 17px;
         }
         
+        .nav-home {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+        
+        .nav-home:hover {
+            color: var(--text-primary);
+            background: var(--surface);
+        }
+        
         .lang-switch {
             display: flex;
-            gap: 6px;
+            gap: 4px;
         }
         
         .lang-btn {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: rgba(255,255,255,0.6);
-            padding: 6px 12px;
-            border-radius: 20px;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-tertiary);
+            padding: 6px 10px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 13px;
+            font-weight: 500;
             transition: all 0.2s;
         }
         
-        .lang-btn:hover { background: rgba(255,255,255,0.15); }
+        .lang-btn:hover { color: var(--text-secondary); }
         
         .lang-btn.active {
-            background: rgba(255,255,255,0.15);
-            color: #fff;
-            border-color: rgba(255,255,255,0.25);
+            background: var(--surface);
+            color: var(--text-primary);
+            border-color: var(--surface-border);
         }
         
         .container {
-            max-width: 720px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 100px 24px 60px;
         }
         
         .header {
+            text-align: center;
             margin-bottom: 48px;
         }
         
         .header h1 {
-            font-size: 36px;
+            font-size: 40px;
             font-weight: 700;
             margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
         }
         
         .header .date {
-            color: rgba(255,255,255,0.5);
+            color: var(--text-tertiary);
             font-size: 14px;
         }
         
-        /* Bento Cards */
+        /* Summary Card */
+        .summary {
+            background: var(--success-soft);
+            border: 1px solid transparent;
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .summary h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--success);
+        }
+        
+        .summary p {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+        
+        /* Bento Grid */
         .bento {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -104,8 +172,8 @@
         }
         
         .card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
             border-radius: 20px;
             padding: 24px;
         }
@@ -114,28 +182,24 @@
             grid-column: span 2;
         }
         
-        .card-highlight {
-            background: linear-gradient(135deg, rgba(52,199,89,0.1) 0%, rgba(0,0,0,0) 60%);
-        }
-        
         .card-label {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1.2px;
-            color: #FF002F;
+            color: var(--accent);
             margin-bottom: 12px;
-            font-weight: 500;
+            font-weight: 600;
         }
         
-        .card h2 {
-            font-size: 18px;
+        .card h3 {
+            font-size: 17px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
         .card p {
             font-size: 15px;
-            color: rgba(255,255,255,0.75);
+            color: var(--text-secondary);
             margin-bottom: 12px;
         }
         
@@ -150,9 +214,9 @@
         
         .card li {
             font-size: 15px;
-            color: rgba(255,255,255,0.75);
-            padding: 8px 0;
-            padding-left: 20px;
+            color: var(--text-secondary);
+            padding: 6px 0;
+            padding-left: 18px;
             position: relative;
         }
         
@@ -160,11 +224,11 @@
             content: "•";
             position: absolute;
             left: 0;
-            color: #FF002F;
+            color: var(--accent);
         }
         
         .card a {
-            color: #FF002F;
+            color: var(--accent);
             text-decoration: none;
         }
         
@@ -172,23 +236,19 @@
             text-decoration: underline;
         }
         
-        .highlight-text {
-            color: #34C759;
-            font-weight: 500;
+        @media (max-width: 600px) {
+            .bento { grid-template-columns: 1fr; }
+            .card-full { grid-column: span 1; }
+            .header h1 { font-size: 32px; }
         }
         
-        @media (max-width: 600px) {
-            .bento {
-                grid-template-columns: 1fr;
-            }
-            
-            .card-full {
-                grid-column: span 1;
-            }
-            
-            .header h1 {
-                font-size: 28px;
-            }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .summary, .card {
+            animation: fadeUp 0.4s ease forwards;
         }
     </style>
 </head>
@@ -198,6 +258,7 @@
             <img src="icon.png" alt="Ripple">
             <span>Ripple</span>
         </a>
+        <a href="index.html" class="nav-home" data-fr="← Accueil" data-en="← Home">← Home</a>
         <div class="lang-switch">
             <button class="lang-btn" onclick="setLang('fr')">FR</button>
             <button class="lang-btn active" onclick="setLang('en')">EN</button>
@@ -206,32 +267,28 @@
 
     <div class="container">
         <div class="header">
-            <h1 data-fr="Confidentialité" data-en="Privacy Policy">Privacy Policy</h1>
-            <p class="date" data-fr="Dernière mise à jour : Décembre 2025" data-en="Last updated: December 2025">Last updated: December 2025</p>
+            <h1 data-fr="Confidentialité" data-en="Privacy">Privacy</h1>
+            <p class="date" data-fr="Mise à jour : Décembre 2025" data-en="Updated: December 2025">Updated: December 2025</p>
+        </div>
+        
+        <div class="summary">
+            <h2 data-fr="Aucune donnée collectée" data-en="No data collected">No data collected</h2>
+            <p data-fr="Pas d'analytics. Pas de tracking. Vos données restent sur votre appareil." data-en="No analytics. No tracking. Your data stays on your device.">No analytics. No tracking. Your data stays on your device.</p>
         </div>
         
         <div class="bento">
-            <!-- Summary -->
-            <div class="card card-full card-highlight">
-                <div class="card-label" data-fr="Résumé" data-en="Summary">Summary</div>
-                <h2 data-fr="Ripple ne collecte aucune donnée personnelle." data-en="Ripple does not collect any personal data.">Ripple does not collect any personal data.</h2>
-                <p data-fr="Pas d'analytics. Pas de tracking. Pas de serveur externe. Vos données restent sur votre appareil." data-en="No analytics. No tracking. No external servers. Your data stays on your device.">No analytics. No tracking. No external servers. Your data stays on your device.</p>
-            </div>
-            
-            <!-- Data accessed -->
             <div class="card">
-                <div class="card-label" data-fr="Données accédées" data-en="Data accessed">Data accessed</div>
-                <p data-fr="L'app accède uniquement à :" data-en="The app only accesses:">The app only accesses:</p>
+                <div class="card-label" data-fr="Accès" data-en="Access">Access</div>
+                <h3 data-fr="Données accédées" data-en="Data accessed">Data accessed</h3>
                 <ul>
                     <li data-fr="Votre bibliothèque Apple Music" data-en="Your Apple Music library">Your Apple Music library</li>
                     <li data-fr="Vos préférences locales" data-en="Your local preferences">Your local preferences</li>
                 </ul>
             </div>
             
-            <!-- Data usage -->
             <div class="card">
                 <div class="card-label" data-fr="Utilisation" data-en="Usage">Usage</div>
-                <p data-fr="Vos données servent à :" data-en="Your data is used to:">Your data is used to:</p>
+                <h3 data-fr="Pourquoi" data-en="What for">What for</h3>
                 <ul>
                     <li data-fr="Afficher vos playlists" data-en="Display your playlists">Display your playlists</li>
                     <li data-fr="Ajouter des titres" data-en="Add tracks">Add tracks</li>
@@ -239,32 +296,30 @@
                 </ul>
             </div>
             
-            <!-- Storage -->
-            <div class="card">
-                <div class="card-label" data-fr="Stockage" data-en="Storage">Storage</div>
-                <p data-fr="Toutes les données sont stockées localement sur votre appareil. Seuls les appels à l'API Apple Music sont effectués pour accéder à votre bibliothèque." data-en="All data is stored locally on your device. Only Apple Music API calls are made to access your library.">All data is stored locally on your device. Only Apple Music API calls are made to access your library.</p>
-            </div>
-            
-            <!-- Third parties -->
-            <div class="card">
-                <div class="card-label" data-fr="Tiers" data-en="Third parties">Third parties</div>
-                <p data-fr="Ripple utilise l'API Apple MusicKit. L'utilisation est soumise à la <a href='https://www.apple.com/legal/privacy/' target='_blank'>politique de confidentialité d'Apple</a>." data-en="Ripple uses the Apple MusicKit API. Use is subject to <a href='https://www.apple.com/legal/privacy/' target='_blank'>Apple's privacy policy</a>.">Ripple uses the Apple MusicKit API. Use is subject to <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple's privacy policy</a>.</p>
-            </div>
-            
-            <!-- Your rights -->
             <div class="card card-full">
-                <div class="card-label" data-fr="Vos droits" data-en="Your rights">Your rights</div>
-                <p data-fr="Vous pouvez à tout moment :" data-en="You can at any time:">You can at any time:</p>
+                <div class="card-label" data-fr="Stockage" data-en="Storage">Storage</div>
+                <h3 data-fr="Données locales uniquement" data-en="Local data only">Local data only</h3>
+                <p data-fr="Toutes les données sont stockées sur votre appareil. Seuls les appels à l'API Apple Music sont effectués pour accéder à votre bibliothèque." data-en="All data is stored on your device. Only Apple Music API calls are made to access your library.">All data is stored on your device. Only Apple Music API calls are made to access your library.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-label" data-fr="Tiers" data-en="Third party">Third party</div>
+                <h3>Apple MusicKit</h3>
+                <p data-fr="Soumis à la <a href='https://www.apple.com/legal/privacy/' target='_blank'>politique de confidentialité Apple</a>." data-en="Subject to <a href='https://www.apple.com/legal/privacy/' target='_blank'>Apple's privacy policy</a>.">Subject to <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple's privacy policy</a>.</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-label" data-fr="Contrôle" data-en="Control">Control</div>
+                <h3 data-fr="Vos droits" data-en="Your rights">Your rights</h3>
                 <ul>
-                    <li data-fr="Révoquer l'accès depuis Réglages > Confidentialité > Multimédia et Apple Music" data-en="Revoke access from Settings > Privacy > Media & Apple Music">Revoke access from Settings > Privacy > Media & Apple Music</li>
-                    <li data-fr="Supprimer l'app et toutes les données locales" data-en="Delete the app and all local data">Delete the app and all local data</li>
+                    <li data-fr="Révoquer l'accès dans Réglages" data-en="Revoke access in Settings">Revoke access in Settings</li>
+                    <li data-fr="Supprimer l'app = tout effacer" data-en="Delete app = erase all">Delete app = erase all</li>
                 </ul>
             </div>
             
-            <!-- Contact -->
             <div class="card card-full">
                 <div class="card-label">Contact</div>
-                <p data-fr="Pour toute question : <a href='mailto:theodore.faraut@gmail.com'>theodore.faraut@gmail.com</a>" data-en="For any questions: <a href='mailto:theodore.faraut@gmail.com'>theodore.faraut@gmail.com</a>">For any questions: <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
+                <p data-fr="Questions ? <a href='mailto:theodore.faraut@gmail.com'>theodore.faraut@gmail.com</a>" data-en="Questions? <a href='mailto:theodore.faraut@gmail.com'>theodore.faraut@gmail.com</a>">Questions? <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
             </div>
         </div>
     </div>

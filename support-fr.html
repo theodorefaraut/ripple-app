@@ -7,13 +7,38 @@
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon.png">
     <style>
+        :root {
+            --bg: #f5f5f7;
+            --surface: #fff;
+            --surface-border: rgba(0,0,0,0.08);
+            --text-primary: #1d1d1f;
+            --text-secondary: rgba(0,0,0,0.55);
+            --text-tertiary: rgba(0,0,0,0.4);
+            --accent: #FF002F;
+            --accent-soft: rgba(255,0,47,0.06);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #000;
+                --surface: #1c1c1e;
+                --surface-border: rgba(255,255,255,0.1);
+                --text-primary: #f5f5f7;
+                --text-secondary: rgba(255,255,255,0.6);
+                --text-tertiary: rgba(255,255,255,0.4);
+                --accent-soft: rgba(255,0,47,0.12);
+            }
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-            background: #000;
-            color: #fff;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text-primary);
             line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
         
         .nav {
@@ -21,14 +46,13 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 16px 24px;
+            padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: var(--bg);
+            border-bottom: 1px solid var(--surface-border);
         }
         
         .nav-logo {
@@ -36,7 +60,7 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            color: #fff;
+            color: var(--text-primary);
         }
         
         .nav-logo img {
@@ -48,6 +72,48 @@
         .nav-logo span {
             font-weight: 600;
             font-size: 17px;
+        }
+        
+        .nav-home {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+        
+        .nav-home:hover {
+            color: var(--text-primary);
+            background: var(--surface);
+        }
+        
+        .lang-switch {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .lang-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-tertiary);
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .lang-btn:hover { color: var(--text-secondary); }
+        
+        .lang-btn.active {
+            background: var(--surface);
+            color: var(--text-primary);
+            border-color: var(--surface-border);
         }
         
         .container {
@@ -62,38 +128,40 @@
         }
         
         .header h1 {
-            font-size: 36px;
+            font-size: 40px;
             font-weight: 700;
             margin-bottom: 12px;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
         }
         
         .header p {
-            color: rgba(255,255,255,0.6);
+            color: var(--text-secondary);
             font-size: 17px;
         }
         
-        .contact-card {
-            background: linear-gradient(135deg, rgba(255,0,47,0.1) 0%, rgba(0,0,0,0) 60%);
-            border: 1px solid rgba(255,255,255,0.08);
+        .contact {
+            background: var(--accent-soft);
+            border: 1px solid transparent;
             border-radius: 20px;
             padding: 32px;
             text-align: center;
             margin-bottom: 48px;
         }
         
-        .contact-card h2 {
-            font-size: 20px;
-            margin-bottom: 12px;
+        .contact h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
         
-        .contact-card a {
-            color: #FF002F;
+        .contact a {
+            color: var(--accent);
             text-decoration: none;
             font-size: 17px;
+            font-weight: 500;
         }
         
-        .contact-card a:hover {
+        .contact a:hover {
             text-decoration: underline;
         }
         
@@ -102,30 +170,25 @@
         }
         
         .section-label {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
-            color: #FF002F;
-            margin-bottom: 20px;
-            font-weight: 500;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-weight: 600;
         }
         
         .bento {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 12px;
         }
         
         .card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 20px;
-            padding: 24px;
-            transition: all 0.2s;
-        }
-        
-        .card:hover {
-            background: rgba(255,255,255,0.06);
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
+            padding: 20px;
         }
         
         .card-full {
@@ -133,34 +196,36 @@
         }
         
         .card h3 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            margin-bottom: 10px;
-            color: #fff;
+            margin-bottom: 6px;
+            color: var(--text-primary);
         }
         
         .card p {
             font-size: 14px;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.6;
+            color: var(--text-secondary);
+            line-height: 1.55;
         }
         
         .card strong {
-            color: #fff;
+            color: var(--text-primary);
+            font-weight: 600;
         }
         
-        @media (max-width: 700px) {
-            .bento {
-                grid-template-columns: 1fr;
-            }
-            
-            .card-full {
-                grid-column: span 1;
-            }
-            
-            .header h1 {
-                font-size: 28px;
-            }
+        @media (max-width: 650px) {
+            .bento { grid-template-columns: 1fr; }
+            .card-full { grid-column: span 1; }
+            .header h1 { font-size: 32px; }
+        }
+        
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .contact, .card {
+            animation: fadeUp 0.4s ease forwards;
         }
     </style>
 </head>
@@ -170,6 +235,11 @@
             <img src="icon.png" alt="Ripple">
             <span>Ripple</span>
         </a>
+        <a href="index.html" class="nav-home">← Accueil</a>
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="window.location.href='support-fr.html'">FR</button>
+            <button class="lang-btn" onclick="window.location.href='support.html'">EN</button>
+        </div>
     </nav>
 
     <div class="container">
@@ -178,74 +248,82 @@
             <p>Besoin d'aide avec Ripple ?</p>
         </div>
         
-        <div class="contact-card">
+        <div class="contact">
             <h2>Contactez-nous</h2>
             <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a>
         </div>
         
+        <!-- Démarrage -->
         <div class="section">
             <div class="section-label">Démarrage</div>
             <div class="bento">
                 <div class="card">
-                    <h3>Pourquoi autoriser Apple Music ?</h3>
+                    <h3>Autorisation Apple Music</h3>
                     <p>Ripple a besoin d'accéder à votre bibliothèque pour afficher vos playlists et vous permettre d'ajouter des titres.</p>
                 </div>
                 <div class="card">
-                    <h3>Abonnement requis ?</h3>
-                    <p>Oui, un abonnement Apple Music actif est nécessaire pour utiliser Ripple.</p>
+                    <h3>Abonnement requis</h3>
+                    <p>Un abonnement Apple Music actif est nécessaire pour utiliser Ripple.</p>
                 </div>
             </div>
         </div>
         
+        <!-- Les modes -->
         <div class="section">
-            <div class="section-label">Modes</div>
+            <div class="section-label">Les modes</div>
             <div class="bento">
                 <div class="card">
-                    <h3>Les deux modes</h3>
-                    <p><strong>Favoris :</strong> swipe à droite ajoute aux favoris.<br><strong>Playlist :</strong> swipe à droite ajoute à une playlist de votre choix.</p>
+                    <h3>Mode Favoris</h3>
+                    <p>Swipe à droite = ajout aux favoris Apple Music.</p>
                 </div>
                 <div class="card">
+                    <h3>Mode Playlist</h3>
+                    <p>Swipe à droite = ajout à une playlist de votre choix.</p>
+                </div>
+                <div class="card card-full">
                     <h3>Changer de mode</h3>
-                    <p>Appuyez sur l'icône main en haut de l'écran. Choisissez Favoris ou Playlist, puis sélectionnez la playlist cible.</p>
+                    <p>Appuyez sur l'icône main en haut de l'écran. Choisissez le mode et la playlist cible.</p>
                 </div>
             </div>
         </div>
         
+        <!-- Questions fréquentes -->
         <div class="section">
-            <div class="section-label">Questions courantes</div>
+            <div class="section-label">Questions fréquentes</div>
             <div class="bento">
                 <div class="card">
-                    <h3>C'est quoi « Pour vous » ?</h3>
-                    <p>Des playlists recommandées par Apple Music selon vos goûts. Idéal pour découvrir de nouveaux titres.</p>
+                    <h3>Pour vous</h3>
+                    <p>Playlists recommandées par Apple Music selon vos goûts.</p>
                 </div>
                 <div class="card">
-                    <h3>Titres grisés ?</h3>
-                    <p>Ce sont les titres déjà traités. Ils restent visibles et interactifs.</p>
+                    <h3>Titres grisés</h3>
+                    <p>Titres déjà traités. Ils restent visibles et interactifs.</p>
                 </div>
                 <div class="card">
-                    <h3>Nouvelle playlist invisible ?</h3>
-                    <p>Les playlists créées récemment peuvent mettre quelques minutes à apparaître. Tirez vers le bas pour actualiser.</p>
+                    <h3>Playlist invisible</h3>
+                    <p>Les nouvelles playlists peuvent mettre quelques minutes à apparaître. Tirez pour actualiser.</p>
                 </div>
                 <div class="card">
-                    <h3>Ajouter à une playlist spécifique ?</h3>
-                    <p>Depuis la liste des titres, appuyez sur + à côté du cœur. Choisissez une playlist ou créez-en une nouvelle.</p>
+                    <h3>Ajouter à une playlist</h3>
+                    <p>Depuis la liste, appuyez sur + à côté du cœur pour choisir une playlist.</p>
                 </div>
             </div>
         </div>
         
+        <!-- Confiance -->
         <div class="section">
-            <div class="section-label">Sécurité</div>
+            <div class="section-label">Confiance</div>
             <div class="bento">
                 <div class="card">
-                    <h3>Ripple supprime mes titres ?</h3>
-                    <p>Non, jamais. Ripple ne supprime aucun titre. Elle vous aide à décider plus vite.</p>
+                    <h3>Suppression de titres ?</h3>
+                    <p>Non. Ripple ne supprime jamais vos titres. Elle vous aide à décider.</p>
                 </div>
                 <div class="card">
-                    <h3>Supprimer mes données ?</h3>
+                    <h3>Supprimer mes données</h3>
                     <p>Toutes les données sont locales. Supprimez l'app pour tout effacer.</p>
                 </div>
                 <div class="card card-full">
-                    <h3>L'app est gratuite ?</h3>
+                    <h3>Gratuit ?</h3>
                     <p>Oui. Ripple est gratuite et sans publicité.</p>
                 </div>
             </div>

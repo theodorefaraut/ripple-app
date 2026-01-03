@@ -3,17 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politique de confidentialité - Ripple</title>
+    <title>Confidentialité - Ripple</title>
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon.png">
     <style>
+        :root {
+            --bg: #f5f5f7;
+            --surface: #fff;
+            --surface-border: rgba(0,0,0,0.08);
+            --text-primary: #1d1d1f;
+            --text-secondary: rgba(0,0,0,0.55);
+            --text-tertiary: rgba(0,0,0,0.4);
+            --accent: #FF002F;
+            --accent-soft: rgba(255,0,47,0.06);
+            --success: #34C759;
+            --success-soft: rgba(52,199,89,0.1);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #000;
+                --surface: #1c1c1e;
+                --surface-border: rgba(255,255,255,0.1);
+                --text-primary: #f5f5f7;
+                --text-secondary: rgba(255,255,255,0.6);
+                --text-tertiary: rgba(255,255,255,0.4);
+                --accent-soft: rgba(255,0,47,0.12);
+                --success-soft: rgba(52,199,89,0.18);
+            }
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-            background: #000;
-            color: #fff;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text-primary);
             line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
         
         .nav {
@@ -21,14 +49,13 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 16px 24px;
+            padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: var(--bg);
+            border-bottom: 1px solid var(--surface-border);
         }
         
         .nav-logo {
@@ -36,7 +63,7 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            color: #fff;
+            color: var(--text-primary);
         }
         
         .nav-logo img {
@@ -50,26 +77,90 @@
             font-size: 17px;
         }
         
+        .nav-home {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            margin-left: auto;
+            margin-right: 16px;
+        }
+        
+        .nav-home:hover {
+            color: var(--text-primary);
+            background: var(--surface);
+        }
+        
+        .lang-switch {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .lang-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-tertiary);
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .lang-btn:hover { color: var(--text-secondary); }
+        
+        .lang-btn.active {
+            background: var(--surface);
+            color: var(--text-primary);
+            border-color: var(--surface-border);
+        }
+        
         .container {
-            max-width: 720px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 100px 24px 60px;
         }
         
         .header {
+            text-align: center;
             margin-bottom: 48px;
         }
         
         .header h1 {
-            font-size: 36px;
+            font-size: 40px;
             font-weight: 700;
             margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
         }
         
         .header .date {
-            color: rgba(255,255,255,0.5);
+            color: var(--text-tertiary);
             font-size: 14px;
+        }
+        
+        .summary {
+            background: var(--success-soft);
+            border: 1px solid transparent;
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .summary h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--success);
+        }
+        
+        .summary p {
+            font-size: 16px;
+            color: var(--text-secondary);
         }
         
         .bento {
@@ -79,8 +170,8 @@
         }
         
         .card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
             border-radius: 20px;
             padding: 24px;
         }
@@ -89,28 +180,24 @@
             grid-column: span 2;
         }
         
-        .card-highlight {
-            background: linear-gradient(135deg, rgba(52,199,89,0.1) 0%, rgba(0,0,0,0) 60%);
-        }
-        
         .card-label {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1.2px;
-            color: #FF002F;
+            color: var(--accent);
             margin-bottom: 12px;
-            font-weight: 500;
+            font-weight: 600;
         }
         
-        .card h2 {
-            font-size: 18px;
+        .card h3 {
+            font-size: 17px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
         .card p {
             font-size: 15px;
-            color: rgba(255,255,255,0.75);
+            color: var(--text-secondary);
             margin-bottom: 12px;
         }
         
@@ -125,9 +212,9 @@
         
         .card li {
             font-size: 15px;
-            color: rgba(255,255,255,0.75);
-            padding: 8px 0;
-            padding-left: 20px;
+            color: var(--text-secondary);
+            padding: 6px 0;
+            padding-left: 18px;
             position: relative;
         }
         
@@ -135,11 +222,11 @@
             content: "•";
             position: absolute;
             left: 0;
-            color: #FF002F;
+            color: var(--accent);
         }
         
         .card a {
-            color: #FF002F;
+            color: var(--accent);
             text-decoration: none;
         }
         
@@ -148,17 +235,18 @@
         }
         
         @media (max-width: 600px) {
-            .bento {
-                grid-template-columns: 1fr;
-            }
-            
-            .card-full {
-                grid-column: span 1;
-            }
-            
-            .header h1 {
-                font-size: 28px;
-            }
+            .bento { grid-template-columns: 1fr; }
+            .card-full { grid-column: span 1; }
+            .header h1 { font-size: 32px; }
+        }
+        
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .summary, .card {
+            animation: fadeUp 0.4s ease forwards;
         }
     </style>
 </head>
@@ -168,24 +256,28 @@
             <img src="icon.png" alt="Ripple">
             <span>Ripple</span>
         </a>
+        <a href="index.html" class="nav-home">← Accueil</a>
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="window.location.href='privacy-fr.html'">FR</button>
+            <button class="lang-btn" onclick="window.location.href='privacy.html'">EN</button>
+        </div>
     </nav>
 
     <div class="container">
         <div class="header">
             <h1>Confidentialité</h1>
-            <p class="date">Dernière mise à jour : Décembre 2025</p>
+            <p class="date">Mise à jour : Décembre 2025</p>
+        </div>
+        
+        <div class="summary">
+            <h2>Aucune donnée collectée</h2>
+            <p>Pas d'analytics. Pas de tracking. Vos données restent sur votre appareil.</p>
         </div>
         
         <div class="bento">
-            <div class="card card-full card-highlight">
-                <div class="card-label">Résumé</div>
-                <h2>Ripple ne collecte aucune donnée personnelle.</h2>
-                <p>Pas d'analytics. Pas de tracking. Pas de serveur externe. Vos données restent sur votre appareil.</p>
-            </div>
-            
             <div class="card">
-                <div class="card-label">Données accédées</div>
-                <p>L'app accède uniquement à :</p>
+                <div class="card-label">Accès</div>
+                <h3>Données accédées</h3>
                 <ul>
                     <li>Votre bibliothèque Apple Music</li>
                     <li>Vos préférences locales</li>
@@ -194,7 +286,7 @@
             
             <div class="card">
                 <div class="card-label">Utilisation</div>
-                <p>Vos données servent à :</p>
+                <h3>Pourquoi</h3>
                 <ul>
                     <li>Afficher vos playlists</li>
                     <li>Ajouter des titres</li>
@@ -202,28 +294,30 @@
                 </ul>
             </div>
             
-            <div class="card">
+            <div class="card card-full">
                 <div class="card-label">Stockage</div>
-                <p>Toutes les données sont stockées localement sur votre appareil. Seuls les appels à l'API Apple Music sont effectués pour accéder à votre bibliothèque.</p>
+                <h3>Données locales uniquement</h3>
+                <p>Toutes les données sont stockées sur votre appareil. Seuls les appels à l'API Apple Music sont effectués pour accéder à votre bibliothèque.</p>
             </div>
             
             <div class="card">
                 <div class="card-label">Tiers</div>
-                <p>Ripple utilise l'API Apple MusicKit. L'utilisation est soumise à la <a href="https://www.apple.com/legal/privacy/" target="_blank">politique de confidentialité d'Apple</a>.</p>
+                <h3>Apple MusicKit</h3>
+                <p>Soumis à la <a href="https://www.apple.com/legal/privacy/" target="_blank">politique de confidentialité Apple</a>.</p>
             </div>
             
-            <div class="card card-full">
-                <div class="card-label">Vos droits</div>
-                <p>Vous pouvez à tout moment :</p>
+            <div class="card">
+                <div class="card-label">Contrôle</div>
+                <h3>Vos droits</h3>
                 <ul>
-                    <li>Révoquer l'accès depuis Réglages > Confidentialité > Multimédia et Apple Music</li>
-                    <li>Supprimer l'app et toutes les données locales</li>
+                    <li>Révoquer l'accès dans Réglages</li>
+                    <li>Supprimer l'app = tout effacer</li>
                 </ul>
             </div>
             
             <div class="card card-full">
                 <div class="card-label">Contact</div>
-                <p>Pour toute question : <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
+                <p>Questions ? <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
             </div>
         </div>
     </div>

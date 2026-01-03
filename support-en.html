@@ -7,116 +7,326 @@
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon.png">
     <style>
+        :root {
+            --bg: #f5f5f7;
+            --surface: #fff;
+            --surface-border: rgba(0,0,0,0.08);
+            --text-primary: #1d1d1f;
+            --text-secondary: rgba(0,0,0,0.55);
+            --text-tertiary: rgba(0,0,0,0.4);
+            --accent: #FF002F;
+            --accent-soft: rgba(255,0,47,0.06);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #000;
+                --surface: #1c1c1e;
+                --surface-border: rgba(255,255,255,0.1);
+                --text-primary: #f5f5f7;
+                --text-secondary: rgba(255,255,255,0.6);
+                --text-tertiary: rgba(255,255,255,0.4);
+                --accent-soft: rgba(255,0,47,0.12);
+            }
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-            background: #000;
-            color: #fff;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text-primary);
             line-height: 1.7;
-            padding: 40px 20px;
+            -webkit-font-smoothing: antialiased;
         }
-        .container { max-width: 640px; margin: 0 auto; }
-        .back {
-            display: inline-flex;
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 6px;
-            color: #FF002F;
+            z-index: 100;
+            background: var(--bg);
+            border-bottom: 1px solid var(--surface-border);
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        
+        .nav-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+        
+        .nav-logo span {
+            font-weight: 600;
+            font-size: 17px;
+        }
+        
+        .nav-home {
+            color: var(--text-tertiary);
             text-decoration: none;
             font-size: 14px;
-            margin-bottom: 32px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            margin-left: auto;
+            margin-right: 16px;
         }
-        .back:hover { text-decoration: underline; }
-        h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
-        .intro { color: rgba(255,255,255,0.7); font-size: 15px; margin-bottom: 32px; }
-        h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: #FF002F; margin-top: 32px; margin-bottom: 16px; }
-        .contact-box {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 20px;
+        
+        .nav-home:hover {
+            color: var(--text-primary);
+            background: var(--surface);
+        }
+        
+        .lang-switch {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .lang-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-tertiary);
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .lang-btn:hover { color: var(--text-secondary); }
+        
+        .lang-btn.active {
+            background: var(--surface);
+            color: var(--text-primary);
+            border-color: var(--surface-border);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .header h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+        
+        .header p {
+            color: var(--text-secondary);
+            font-size: 17px;
+        }
+        
+        .contact {
+            background: var(--accent-soft);
+            border: 1px solid transparent;
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .contact h2 {
+            font-size: 18px;
+            font-weight: 600;
             margin-bottom: 8px;
         }
-        .contact-box p { margin: 0; font-size: 15px; }
-        .contact-box a { color: #FF002F; text-decoration: none; }
-        .contact-box a:hover { text-decoration: underline; }
-        .faq-item {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 10px;
+        
+        .contact a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 500;
         }
-        .faq-item h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: #fff; }
-        .faq-item p { font-size: 14px; margin: 0; color: rgba(255,255,255,0.7); line-height: 1.6; }
+        
+        .contact a:hover {
+            text-decoration: underline;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
+            padding: 20px;
+        }
+        
+        .card-full {
+            grid-column: span 2;
+        }
+        
+        .card h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+        
+        .card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+        
+        .card strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        @media (max-width: 650px) {
+            .bento { grid-template-columns: 1fr; }
+            .card-full { grid-column: span 1; }
+            .header h1 { font-size: 32px; }
+        }
+        
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .contact, .card {
+            animation: fadeUp 0.4s ease forwards;
+        }
     </style>
 </head>
 <body>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="icon.png" alt="Ripple">
+            <span>Ripple</span>
+        </a>
+        <a href="index.html" class="nav-home">← Home</a>
+        <div class="lang-switch">
+            <button class="lang-btn" onclick="window.location.href='support-fr.html'">FR</button>
+            <button class="lang-btn active" onclick="window.location.href='support-en.html'">EN</button>
+        </div>
+    </nav>
+
     <div class="container">
-        <a href="index.html" class="back">← Back</a>
-        
-        <h1>Support</h1>
-        <p class="intro">Need help with Ripple? We're here for you.</p>
-        
-        <h2>Contact</h2>
-        <div class="contact-box">
-            <p>📧 <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a></p>
+        <div class="header">
+            <h1>Support</h1>
+            <p>Need help with Ripple?</p>
         </div>
         
-        <h2>FAQ</h2>
-        
-        <div class="faq-item">
-            <h3>Why do I need to authorize access to Apple Music?</h3>
-            <p>Ripple needs to access your library to display your playlists, recommendations, and allow you to add tracks to your favorites or playlists.</p>
+        <div class="contact">
+            <h2>Contact us</h2>
+            <a href="mailto:theodore.faraut@gmail.com">theodore.faraut@gmail.com</a>
         </div>
         
-        <div class="faq-item">
-            <h3>What's the difference between the two modes?</h3>
-            <p><strong>Favorites mode:</strong> swipe right adds the track to your Apple Music favorites.<br><strong>Add to Playlist mode:</strong> swipe right adds the track to a playlist of your choice.</p>
+        <!-- Getting Started -->
+        <div class="section">
+            <div class="section-label">Getting started</div>
+            <div class="bento">
+                <div class="card">
+                    <h3>Apple Music authorization</h3>
+                    <p>Ripple needs access to your library to display your playlists and let you add tracks.</p>
+                </div>
+                <div class="card">
+                    <h3>Subscription required</h3>
+                    <p>An active Apple Music subscription is required to use Ripple.</p>
+                </div>
+            </div>
         </div>
         
-        <div class="faq-item">
-            <h3>How do I change the swipe mode?</h3>
-            <p>Tap the hand icon (🖐️) at the top of the screen. You can choose between Favorites mode or Add to Playlist mode, and select the target playlist.</p>
+        <!-- Modes -->
+        <div class="section">
+            <div class="section-label">Modes</div>
+            <div class="bento">
+                <div class="card">
+                    <h3>Favorites mode</h3>
+                    <p>Swipe right = add to Apple Music favorites.</p>
+                </div>
+                <div class="card">
+                    <h3>Playlist mode</h3>
+                    <p>Swipe right = add to a playlist of your choice.</p>
+                </div>
+                <div class="card card-full">
+                    <h3>Change mode</h3>
+                    <p>Tap the hand icon at the top. Choose the mode and target playlist.</p>
+                </div>
+            </div>
         </div>
         
-        <div class="faq-item">
-            <h3>How do I add a track to a specific playlist?</h3>
-            <p>From the track list, tap the + icon next to the heart. You can choose an existing playlist or create a new one.</p>
+        <!-- Common Questions -->
+        <div class="section">
+            <div class="section-label">Common questions</div>
+            <div class="bento">
+                <div class="card">
+                    <h3>For You</h3>
+                    <p>Playlists recommended by Apple Music based on your taste.</p>
+                </div>
+                <div class="card">
+                    <h3>Grayed tracks</h3>
+                    <p>Already processed tracks. They remain visible and interactive.</p>
+                </div>
+                <div class="card">
+                    <h3>Playlist not showing</h3>
+                    <p>New playlists may take a few minutes to appear. Pull to refresh.</p>
+                </div>
+                <div class="card">
+                    <h3>Add to playlist</h3>
+                    <p>From the list, tap + next to the heart to choose a playlist.</p>
+                </div>
+            </div>
         </div>
         
-        <div class="faq-item">
-            <h3>What is the "For You" section?</h3>
-            <p>This section displays playlists recommended by Apple Music based on your music tastes. Perfect for discovering new tracks!</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3>Why are some tracks grayed out?</h3>
-            <p>Grayed out tracks are those you've already processed (swiped). They remain visible for reference and you can still interact with them.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3>My created playlists don't appear</h3>
-            <p>Recently created playlists may take a few minutes to appear (Apple Music limitation). Pull down to refresh.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3>Does Ripple delete my tracks?</h3>
-            <p>No, never. Ripple never deletes any tracks from your library. It simply helps you organize your music faster.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3>Does the app require an Apple Music subscription?</h3>
-            <p>Yes, an active Apple Music subscription is required to use Ripple.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3>How do I delete my data?</h3>
-            <p>All data is stored locally on your device. Simply delete the app to erase all data.</p>
-        </div>
-        
-        <div class="faq-item">
-            <h3>Is the app free?</h3>
-            <p>Yes, Ripple is completely free and ad-free.</p>
+        <!-- Trust -->
+        <div class="section">
+            <div class="section-label">Trust</div>
+            <div class="bento">
+                <div class="card">
+                    <h3>Track deletion?</h3>
+                    <p>No. Ripple never deletes your tracks. It helps you decide.</p>
+                </div>
+                <div class="card">
+                    <h3>Delete my data</h3>
+                    <p>All data is local. Delete the app to erase everything.</p>
+                </div>
+                <div class="card card-full">
+                    <h3>Free?</h3>
+                    <p>Yes. Ripple is free and ad-free.</p>
+                </div>
+            </div>
         </div>
     </div>
 </body>
