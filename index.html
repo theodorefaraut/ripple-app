@@ -8,72 +8,111 @@
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="apple-touch-icon" href="icon.png">
     <style>
-        :root {
-            --bg: #fff;
-            --bg-gradient: radial-gradient(ellipse at 50% 0%, rgba(255,0,47,0.08) 0%, transparent 50%), #fff;
-            --surface: rgba(255,255,255,0.7);
-            --surface-border: rgba(0,0,0,0.06);
-            --text-primary: #1d1d1f;
-            --text-secondary: rgba(0,0,0,0.55);
-            --text-tertiary: rgba(0,0,0,0.4);
-            --accent: #FF002F;
-            --accent-soft: rgba(255,0,47,0.08);
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #000;
-                --bg-gradient: radial-gradient(ellipse at 50% 0%, rgba(255,0,47,0.15) 0%, transparent 50%), #000;
-                --surface: rgba(255,255,255,0.06);
-                --surface-border: rgba(255,255,255,0.1);
-                --text-primary: #f5f5f7;
-                --text-secondary: rgba(255,255,255,0.6);
-                --text-tertiary: rgba(255,255,255,0.4);
-                --accent-soft: rgba(255,0,47,0.15);
-            }
-        }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
+        :root {
+            --bg: #000;
+            --surface: rgba(255,255,255,0.05);
+            --surface-hover: rgba(255,255,255,0.08);
+            --surface-border: rgba(255,255,255,0.08);
+            --glass-border: rgba(255,255,255,0.12);
+            --text-primary: #f5f5f7;
+            --text-secondary: rgba(255,255,255,0.6);
+            --text-tertiary: rgba(255,255,255,0.35);
+            --accent: #FF002F;
+            --accent-soft: rgba(255,0,47,0.12);
+            --accent-glow: rgba(255,0,47,0.4);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-gradient);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+            background: #000;
             min-height: 100vh;
             color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
-        
-        /* Icons */
-        .icon-svg {
-            width: 24px;
-            height: 24px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 1.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+
+        /* ── Lava Lamp Background ── */
+        .lava-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
         }
-        
-        .icon-svg.large {
-            width: 32px;
-            height: 32px;
+
+        .lava-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            will-change: transform;
         }
-        
-        /* Navigation */
+
+        .lava-blob-1 {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(255,0,47,0.35) 0%, transparent 70%);
+            top: -10%; left: -5%;
+            animation: lavaMove1 25s ease-in-out infinite;
+        }
+        .lava-blob-2 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(255,0,47,0.25) 0%, transparent 70%);
+            bottom: -10%; right: -5%;
+            animation: lavaMove2 30s ease-in-out infinite;
+        }
+        .lava-blob-3 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(255,0,47,0.2) 0%, transparent 70%);
+            top: 40%; left: 50%;
+            animation: lavaMove3 20s ease-in-out infinite;
+        }
+        .lava-blob-4 {
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(180,0,30,0.2) 0%, transparent 70%);
+            top: 20%; right: 20%;
+            animation: lavaMove4 28s ease-in-out infinite;
+        }
+
+        @keyframes lavaMove1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(15vw, 20vh) scale(1.1); }
+            66% { transform: translate(5vw, 40vh) scale(0.9); }
+        }
+        @keyframes lavaMove2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-20vw, -15vh) scale(1.15); }
+            66% { transform: translate(-10vw, -30vh) scale(0.85); }
+        }
+        @keyframes lavaMove3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-15vw, -10vh) scale(1.2); }
+        }
+        @keyframes lavaMove4 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            40% { transform: translate(-10vw, 15vh) scale(1.1); }
+            80% { transform: translate(5vw, -10vh) scale(0.95); }
+        }
+
+        /* ── Navigation ── */
         .nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 14px 24px;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            background: var(--bg);
-            border-bottom: 1px solid var(--surface-border);
+            background: rgba(20,20,20,0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            width: calc(100% - 40px);
+            max-width: 1100px;
         }
-        
+
         .nav-logo {
             display: flex;
             align-items: center;
@@ -81,209 +120,222 @@
             text-decoration: none;
             color: var(--text-primary);
         }
-        
         .nav-logo img {
-            width: 32px;
-            height: 32px;
+            width: 32px; height: 32px;
             border-radius: 8px;
         }
-        
         .nav-logo span {
             font-weight: 600;
             font-size: 17px;
         }
-        
-        .lang-switch {
-            display: flex;
-            gap: 4px;
-        }
-        
+
+        .lang-switch { display: flex; gap: 4px; }
         .lang-btn {
             background: transparent;
             border: 1px solid transparent;
             color: var(--text-tertiary);
-            padding: 6px 10px;
-            border-radius: 8px;
+            padding: 6px 12px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 13px;
             font-weight: 500;
-            transition: all 0.2s;
+            transition: all 0.25s;
         }
-        
-        .lang-btn:hover {
-            color: var(--text-secondary);
-        }
-        
+        .lang-btn:hover { color: var(--text-secondary); }
         .lang-btn.active {
-            background: var(--surface);
+            background: rgba(255,255,255,0.08);
             color: var(--text-primary);
-            border-color: var(--surface-border);
+            border-color: var(--glass-border);
         }
-        
-        /* Container */
+
+        /* ── Icons ── */
+        .icon-svg {
+            width: 24px; height: 24px;
+            fill: none; stroke: currentColor;
+            stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+        }
+        .icon-svg.large { width: 32px; height: 32px; }
+
+        /* ── Container ── */
         .container {
+            position: relative;
+            z-index: 1;
             max-width: 1100px;
             margin: 0 auto;
-            padding: 88px 20px 60px;
+            padding: 100px 20px 60px;
         }
-        
-        /* Bento Grid */
+
+        /* ── Bento Grid ── */
         .bento {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
             gap: 16px;
         }
-        
+
+        /* ── Glass Card ── */
         .card {
-            background: var(--surface);
-            border: 1px solid var(--surface-border);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
             border-radius: 24px;
             padding: 32px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(40px) saturate(1.4);
+            -webkit-backdrop-filter: blur(40px) saturate(1.4);
+            transition: transform 0.35s cubic-bezier(.2,.8,.3,1), border-color 0.35s, box-shadow 0.35s;
+            opacity: 0;
+            transform: translateY(30px);
         }
-        
-        /* Hero */
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s cubic-bezier(.2,.8,.3,1), transform 0.6s cubic-bezier(.2,.8,.3,1), border-color 0.35s, box-shadow 0.35s;
+        }
+        .card:hover {
+            border-color: rgba(255,255,255,0.14);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+            transform: translateY(-2px);
+        }
+        .card.visible:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ── Hero ── */
         .card-hero {
             grid-column: span 12;
             text-align: center;
-            padding: 72px 40px;
-            background: var(--accent-soft);
-            border-color: transparent;
+            padding: 80px 40px 72px;
+            background: radial-gradient(ellipse at 50% 80%, rgba(255,0,47,0.1) 0%, transparent 60%), rgba(255,255,255,0.03);
+            border-color: rgba(255,0,47,0.12);
+            position: relative;
+            overflow: hidden;
         }
-        
+        .card-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 50% 100%, rgba(255,0,47,0.08) 0%, transparent 50%);
+            animation: heroGlow 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes heroGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
         .card-hero .logo {
-            width: 96px;
-            height: 96px;
-            border-radius: 22px;
-            margin-bottom: 24px;
-            box-shadow: 0 16px 48px rgba(255,0,47,0.25);
+            width: 100px; height: 100px;
+            border-radius: 24px;
+            margin-bottom: 28px;
+            box-shadow: 0 20px 60px rgba(255,0,47,0.4), 0 0 80px rgba(255,0,47,0.15);
+            position: relative;
+            z-index: 1;
         }
-        
-        @media (prefers-color-scheme: dark) {
-            .card-hero .logo {
-                box-shadow: 0 16px 48px rgba(255,0,47,0.4);
-            }
-        }
-        
         .card-hero h1 {
-            font-size: 52px;
+            font-size: 56px;
             font-weight: 700;
-            letter-spacing: -1.5px;
-            margin-bottom: 8px;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+            position: relative; z-index: 1;
+            background: linear-gradient(180deg, #fff 40%, rgba(255,255,255,0.7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
         .card-hero .tagline {
-            font-size: 21px;
+            font-size: 22px;
             color: var(--text-secondary);
-            margin-bottom: 32px;
+            margin-bottom: 36px;
             font-weight: 400;
+            position: relative; z-index: 1;
         }
-        
+        .badge { position: relative; z-index: 1; }
         .badge img {
-            height: 52px;
-            transition: transform 0.2s, opacity 0.2s;
+            height: 54px;
+            transition: transform 0.25s, opacity 0.25s;
+            filter: brightness(0.9);
         }
-        
         .badge img:hover {
-            transform: scale(1.03);
-            opacity: 0.9;
+            transform: scale(1.04);
+            filter: brightness(1);
         }
-        
-        /* Swipe Section */
+
+        /* ── Swipe Section ── */
         .card-swipe {
             grid-column: span 8;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
-        
         .card-label {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             color: var(--accent);
             margin-bottom: 14px;
             font-weight: 600;
         }
-        
         .card h2 {
             font-size: 28px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             letter-spacing: -0.5px;
         }
-        
         .card p {
             font-size: 16px;
             color: var(--text-secondary);
             line-height: 1.65;
         }
-        
-        /* Swipe Demo */
+
         .swipe-demo {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 48px;
-            margin-top: 32px;
+            gap: 56px;
+            margin-top: 28px;
             padding: 32px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 16px;
-            border: 1px solid var(--surface-border);
+            background: rgba(255,255,255,0.03);
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.06);
         }
-        
-        @media (prefers-color-scheme: dark) {
-            .swipe-demo {
-                background: rgba(255,255,255,0.04);
-            }
-        }
-        
         .swipe-action {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 12px;
         }
-        
         .swipe-circle {
-            width: 64px;
-            height: 64px;
+            width: 64px; height: 64px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        
+        .swipe-circle:hover { transform: scale(1.08); }
         .swipe-left .swipe-circle {
-            background: var(--surface);
-            border: 2px solid var(--surface-border);
+            background: rgba(255,255,255,0.06);
+            border: 1.5px solid rgba(255,255,255,0.1);
             color: var(--text-tertiary);
         }
-        
         .swipe-right .swipe-circle {
             background: var(--accent);
             color: white;
-            box-shadow: 0 8px 24px rgba(255,0,47,0.3);
+            box-shadow: 0 8px 30px rgba(255,0,47,0.4), 0 0 60px rgba(255,0,47,0.15);
         }
-        
-        .swipe-text {
-            text-align: center;
+        .swipe-right .swipe-circle:hover {
+            box-shadow: 0 12px 40px rgba(255,0,47,0.5), 0 0 80px rgba(255,0,47,0.2);
         }
-        
         .swipe-title {
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 15px; font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 2px;
         }
-        
         .swipe-desc {
             font-size: 13px;
             color: var(--text-tertiary);
         }
-        
-        /* Preview Card */
+
+        /* ── Preview Card ── */
         .card-preview {
             grid-column: span 4;
             display: flex;
@@ -293,10 +345,8 @@
             text-align: center;
             min-height: 260px;
         }
-        
         .preview-icon {
-            width: 72px;
-            height: 72px;
+            width: 72px; height: 72px;
             border-radius: 50%;
             background: var(--accent-soft);
             display: flex;
@@ -304,64 +354,58 @@
             justify-content: center;
             margin-bottom: 20px;
             color: var(--accent);
+            box-shadow: 0 0 40px rgba(255,0,47,0.15);
+            transition: box-shadow 0.3s;
         }
-        
+        .card-preview:hover .preview-icon {
+            box-shadow: 0 0 60px rgba(255,0,47,0.25);
+        }
         .card-preview h3 {
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 20px; font-weight: 600;
             margin-bottom: 8px;
         }
-        
-        .card-preview p {
-            font-size: 15px;
-            color: var(--text-secondary);
-        }
-        
-        /* Mode Cards */
+        .card-preview p { font-size: 15px; color: var(--text-secondary); }
+
+        /* ── Mode Cards ── */
         .card-mode {
             grid-column: span 6;
             padding: 28px;
         }
-        
         .mode-header {
             display: flex;
             align-items: center;
             gap: 16px;
             margin-bottom: 16px;
         }
-        
         .mode-icon {
-            width: 52px;
-            height: 52px;
+            width: 52px; height: 52px;
             border-radius: 14px;
             background: var(--accent-soft);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--accent);
+            box-shadow: 0 0 30px rgba(255,0,47,0.1);
+            transition: box-shadow 0.3s;
         }
-        
-        .mode-header h3 {
-            font-size: 20px;
-            font-weight: 600;
+        .card-mode:hover .mode-icon {
+            box-shadow: 0 0 40px rgba(255,0,47,0.2);
         }
-        
+        .mode-header h3 { font-size: 20px; font-weight: 600; }
         .card-mode p {
             font-size: 15px;
             color: var(--text-secondary);
             line-height: 1.6;
         }
-        
-        /* Features Row */
+
+        /* ── Feature Cards ── */
         .card-feature {
             grid-column: span 4;
             text-align: center;
             padding: 36px 24px;
         }
-        
         .feature-icon {
-            width: 56px;
-            height: 56px;
+            width: 56px; height: 56px;
             border-radius: 50%;
             background: var(--accent-soft);
             display: flex;
@@ -369,37 +413,28 @@
             justify-content: center;
             margin: 0 auto 16px;
             color: var(--accent);
+            box-shadow: 0 0 30px rgba(255,0,47,0.1);
+            transition: box-shadow 0.3s;
         }
-        
+        .card-feature:hover .feature-icon {
+            box-shadow: 0 0 50px rgba(255,0,47,0.2);
+        }
         .card-feature h3 {
-            font-size: 17px;
-            font-weight: 600;
+            font-size: 17px; font-weight: 600;
             margin-bottom: 8px;
         }
-        
-        .card-feature p {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-        
-        /* Trust Section */
+        .card-feature p { font-size: 14px; color: var(--text-secondary); }
+
+        /* ── Trust Section ── */
         .card-trust {
             grid-column: span 12;
             text-align: center;
-            padding: 48px 40px;
-            background: var(--surface);
+            padding: 52px 40px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(255,0,47,0.06) 0%, transparent 60%), rgba(255,255,255,0.03);
         }
-        
-        .card-trust h2 {
-            font-size: 24px;
-            margin-bottom: 12px;
-        }
-        
-        .card-trust > p {
-            max-width: 480px;
-            margin: 0 auto;
-        }
-        
+        .card-trust h2 { font-size: 24px; margin-bottom: 12px; }
+        .card-trust > p { max-width: 480px; margin: 0 auto; }
+
         .trust-badges {
             display: flex;
             justify-content: center;
@@ -407,7 +442,6 @@
             gap: 32px;
             margin-top: 32px;
         }
-        
         .trust-badge {
             display: flex;
             align-items: center;
@@ -416,10 +450,8 @@
             font-weight: 500;
             color: var(--text-primary);
         }
-        
         .trust-badge .icon {
-            width: 28px;
-            height: 28px;
+            width: 28px; height: 28px;
             border-radius: 50%;
             background: var(--accent-soft);
             color: var(--accent);
@@ -427,14 +459,12 @@
             align-items: center;
             justify-content: center;
         }
-        
         .trust-badge .icon svg {
-            width: 14px;
-            height: 14px;
+            width: 14px; height: 14px;
             stroke-width: 2.5;
         }
-        
-        /* Footer */
+
+        /* ── Footer ── */
         .footer {
             grid-column: span 12;
             display: flex;
@@ -442,60 +472,51 @@
             gap: 40px;
             padding: 32px 0 16px;
         }
-        
         .footer a {
             color: var(--text-tertiary);
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: color 0.2s;
+            transition: color 0.25s;
         }
-        
-        .footer a:hover {
-            color: var(--text-primary);
-        }
-        
-        /* Responsive */
+        .footer a:hover { color: var(--text-primary); }
+
+        /* ── Responsive ── */
         @media (max-width: 900px) {
             .card-swipe { grid-column: span 12; }
             .card-preview { grid-column: span 12; min-height: auto; padding: 40px; }
             .card-mode { grid-column: span 6; }
+            .lava-blob { filter: blur(80px); }
+            .lava-blob-1 { width: 400px; height: 400px; }
+            .lava-blob-2 { width: 350px; height: 350px; }
+            .lava-blob-3 { width: 250px; height: 250px; }
+            .lava-blob-4 { width: 200px; height: 200px; }
         }
-        
+
         @media (max-width: 700px) {
             .bento { gap: 12px; }
             .card { padding: 24px; border-radius: 20px; }
-            .card-hero { padding: 48px 24px; }
-            .card-hero h1 { font-size: 40px; }
+            .card-hero { padding: 56px 24px 48px; }
+            .card-hero h1 { font-size: 42px; }
             .card-hero .tagline { font-size: 18px; }
             .card h2 { font-size: 24px; }
             .card-mode { grid-column: span 12; }
             .card-feature { grid-column: span 12; }
             .swipe-demo { gap: 32px; padding: 24px; }
             .trust-badges { flex-direction: column; align-items: center; gap: 16px; }
+            .nav { top: 10px; width: calc(100% - 24px); padding: 8px 16px; border-radius: 14px; }
         }
-        
-        /* Fade in animation */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .card {
-            animation: fadeUp 0.5s ease forwards;
-        }
-        
-        .card:nth-child(1) { animation-delay: 0s; }
-        .card:nth-child(2) { animation-delay: 0.05s; }
-        .card:nth-child(3) { animation-delay: 0.1s; }
-        .card:nth-child(4) { animation-delay: 0.15s; }
-        .card:nth-child(5) { animation-delay: 0.2s; }
-        .card:nth-child(6) { animation-delay: 0.25s; }
-        .card:nth-child(7) { animation-delay: 0.3s; }
-        .card:nth-child(8) { animation-delay: 0.35s; }
     </style>
 </head>
 <body>
+    <!-- Lava Lamp Background -->
+    <div class="lava-bg">
+        <div class="lava-blob lava-blob-1"></div>
+        <div class="lava-blob lava-blob-2"></div>
+        <div class="lava-blob lava-blob-3"></div>
+        <div class="lava-blob lava-blob-4"></div>
+    </div>
+
     <nav class="nav">
         <a href="index.html" class="nav-logo">
             <img src="icon.png" alt="Ripple">
@@ -506,7 +527,7 @@
             <button class="lang-btn active" onclick="setLang('en')">EN</button>
         </div>
     </nav>
-    
+
     <div class="container">
         <div class="bento">
             <!-- Hero -->
@@ -520,13 +541,13 @@
                     </a>
                 </div>
             </div>
-            
+
             <!-- Swipe Section -->
             <div class="card card-swipe">
                 <div class="card-label" data-fr="Comment ça marche" data-en="How it works">How it works</div>
                 <h2 data-fr="Un geste simple. Deux décisions." data-en="One simple gesture. Two decisions.">One simple gesture. Two decisions.</h2>
                 <p data-fr="À droite : ajouter. À gauche : passer / retirer." data-en="Right: add. Left: skip / remove.">Right: add. Left: skip / remove.</p>
-                
+
                 <div class="swipe-demo">
                     <div class="swipe-action swipe-left">
                         <div class="swipe-circle">
@@ -548,7 +569,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Preview -->
             <div class="card card-preview">
                 <div class="preview-icon">
@@ -557,7 +578,7 @@
                 <h3 data-fr="Aperçu audio" data-en="Audio preview">Audio preview</h3>
                 <p data-fr="Écoutez chaque titre avant de décider." data-en="Listen to each track before deciding.">Listen to each track before deciding.</p>
             </div>
-            
+
             <!-- Mode Cards -->
             <div class="card card-mode">
                 <div class="mode-header">
@@ -569,7 +590,7 @@
                 <p data-fr="→ Ajouter aux favoris" data-en="→ Add to favorites">→ Add to favorites</p>
                 <p data-fr="← Passer / Retirer" data-en="← Skip / Remove">← Skip / Remove</p>
             </div>
-            
+
             <div class="card card-mode">
                 <div class="mode-header">
                     <div class="mode-icon">
@@ -580,7 +601,7 @@
                 <p data-fr="→ Ajouter à votre playlist" data-en="→ Add to your playlist">→ Add to your playlist</p>
                 <p data-fr="← Passer" data-en="← Skip">← Skip</p>
             </div>
-            
+
             <!-- Features -->
             <div class="card card-feature">
                 <div class="feature-icon">
@@ -589,7 +610,7 @@
                 <h3 data-fr="Pour vous" data-en="For You">For You</h3>
                 <p data-fr="Recommandations Apple Music" data-en="Apple Music recommendations">Apple Music recommendations</p>
             </div>
-            
+
             <div class="card card-feature">
                 <div class="feature-icon">
                     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -597,7 +618,7 @@
                 <h3 data-fr="Votre bibliothèque" data-en="Your Library">Your Library</h3>
                 <p data-fr="Vos playlists existantes" data-en="Your existing playlists">Your existing playlists</p>
             </div>
-            
+
             <div class="card card-feature">
                 <div class="feature-icon">
                     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -605,12 +626,12 @@
                 <h3 data-fr="Mode sombre" data-en="Dark mode">Dark mode</h3>
                 <p data-fr="Interface adaptative" data-en="Adaptive interface">Adaptive interface</p>
             </div>
-            
+
             <!-- Trust -->
             <div class="card card-trust">
                 <h2 data-fr="Ripple ne supprime jamais votre musique." data-en="Ripple never deletes your music.">Ripple never deletes your music.</h2>
                 <p data-fr="Vous gardez le contrôle. L'app vous aide simplement à décider plus vite." data-en="You stay in control. The app simply helps you decide faster.">You stay in control. The app simply helps you decide faster.</p>
-                
+
                 <div class="trust-badges">
                     <div class="trust-badge">
                         <span class="icon"><svg class="icon-svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -630,7 +651,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Footer -->
             <div class="footer">
                 <a href="privacy.html" data-fr="Confidentialité" data-en="Privacy">Privacy</a>
@@ -649,9 +670,23 @@
             });
             localStorage.setItem('lang', lang);
         }
-        
+
         const savedLang = localStorage.getItem('lang');
         setLang(savedLang || 'en');
+
+        // Intersection Observer for scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, i * 60);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.card').forEach(card => observer.observe(card));
     </script>
 </body>
 </html>
